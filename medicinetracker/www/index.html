@@ -38,6 +38,7 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
         <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
@@ -53,27 +54,35 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div> -->
-        <div data-role="page" id="patients">
+        <div data-role="page" id="home">
+            <div data-role="navbar">
+                <ul>
+                  <li><a href="#" class="ui-btn-active">Patients</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Medicine</a></li>
+                  <li><a href="#">Report</a></li>
+                </ul>
+            </div>
             <div data-role="header">
                 <h1>Patients</h1>
             </div>
             <div role="main" class="ui-content">
                 <div class="example-wrapper">
-                    <ul data-role="listview" id="patient-list"></ul>
+                    <ul data-role="listview" id="patient-list" data-inset="true"></ul>
                 </div>
             </div>
             <div data-role="footer">
                 <h1>Copyright 2017</h1>
             </div>
         </div>
-        <!-- <div data-role="page" id="headline">
+        <div data-role="page" id="events">
             <div data-role="header">
                 <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
-                <h1>Movie Info</h1>
+                <h1>Events</h1>
             </div>
             <div data-role="content">
-                <ul data-role="listview" id="movie-data" data-theme="a"></ul>
+                <ul data-role="listview" id="event-list" data-theme="a"></ul>
             </div>
-        </div> -->
+        </div>
     </body>
 </html>
