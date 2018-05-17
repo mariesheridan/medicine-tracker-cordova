@@ -38,17 +38,42 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/medicinetracker.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
         <title>Medicine Tracker</title>
     </head>
     <body>
-        <div class="app">
+        <!-- <div class="app">
             <h1>Medicine Tracker</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+        </div> -->
+        <div data-role="page" id="patients">
+            <div data-role="header">
+                <h1>Patients</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <div class="example-wrapper">
+                    <ul data-role="listview" id="patient-list"></ul>
+                </div>
+            </div>
+            <div data-role="footer">
+                <h1>Copyright 2017</h1>
+            </div>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <!-- <div data-role="page" id="headline">
+            <div data-role="header">
+                <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>Movie Info</h1>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" id="movie-data" data-theme="a"></ul>
+            </div>
+        </div> -->
     </body>
 </html>
