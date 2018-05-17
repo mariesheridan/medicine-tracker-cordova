@@ -31,7 +31,7 @@
 //     return MedicineTracker;
 // };
 
-$(document).on('pagecreate', '#home', function(){
+$(document).on('pagecreate', '#patients', function(){
   var self = this;
   var url = 'https://polar-reaches-96790.herokuapp.com/patients.json';
 
@@ -49,12 +49,12 @@ $(document).on('pagecreate', '#home', function(){
 
 $(document).on('pagebeforeshow', '#events', function(){
     $('#event-list').empty();
-    $.each(patients, function(i, row) {
-        if(row.id == movieInfo.id) {
-            $('#event-list').append('<li>Title: '+row.original_title+'</li>');
-            $('#event-list').listview('refresh');
-        }
-    });
+    // $.each(patients, function(i, row) {
+    //     if(row.id == movieInfo.id) {
+    //         $('#event-list').append('<li>Title: '+row.original_title+'</li>');
+    //         $('#event-list').listview('refresh');
+    //     }
+    // });
 });
 
 // $(document).on('tap', '#movie-list li a', function(){
