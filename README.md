@@ -1,5 +1,6 @@
 # README
 
+======
 ### Setup ###
 
 1. Install node.js
@@ -13,8 +14,11 @@
 4. Add a simulator in Android Studio via Tools > AVD Manager.
    Choose API Level 26 (Android 8.0).
 
+======
 ### Run the App ###
 
+------
+#### android ####
 1. `cd medicinetracker`
 
 2. `cordova add platform android`
@@ -23,6 +27,19 @@
 
 4. `cordova emulate android`
 
+------
+
+======
+### Debug Emulator's JS, HTML, CSS ###
+
+------
+#### android ####
+1. Open Google Chrome
+
+2. Go to `chrome://inspect/#devices`
+------
+
+======
 
 ### Problems Encountered ###
 
