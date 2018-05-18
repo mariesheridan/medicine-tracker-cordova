@@ -9,12 +9,12 @@ $(document).on('pagebeforecreate', '#patients', function(){
 });
 
 $(document).on('pagebeforeshow', '#patients', function(){
-    tools.getPatients();
+    Patients.getPatients();
 });
 
 $(document).on('pagebeforeshow', '#edit-patient', function(){
     $("#edit-patient-form").hide();
-    tools.getCSRFToken('patients/new', function(success){
+    Tools.getCSRFToken('patients/new', function(success){
         $("#edit-patient-form").show();
     });
 });

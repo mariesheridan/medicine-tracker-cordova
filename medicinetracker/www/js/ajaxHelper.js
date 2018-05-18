@@ -1,7 +1,7 @@
-var ajaxHelper = {
+var AjaxHelper = {
 
     getURL: function(endpoint) {
-        var url = storage.baseURL + endpoint;
+        var url = State.baseURL + endpoint;
         return url;
     },
 
