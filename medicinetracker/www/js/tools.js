@@ -5,17 +5,28 @@ var tools = {
         return url;
     },
 
-    getCSRFToken: function(endpoint) {
+    getCSRFToken: function(endpoint, callback) {
         var url = this.getURL(endpoint);
 
         $.ajax({
             url: url,
             async: true,
             success: function (result) {
-                console.log(result);
+                html = $.parseHTML(result);
+                csrfToken = html.find(function(element){
+                    return element.name === "csrf-token";
+                });
+
+                storage.csrfToken = csrfToken.content;
+
+                if ($.isFunction(callback)) {
+                    callback(true);
+                }
             },
             error: function (request,error) {
-
+                if ($.isFunction(callback)) {
+                    callback(false);
+                }
             }
         });
     },

@@ -17,7 +17,11 @@ $(document).on('pagebeforeshow', '#patients', function(){
 });
 
 $(document).on('pagebeforeshow', '#edit-patient', function(){
+    $("#edit-patient-form").hide();
     console.log("FIRED: edit-patient pagecontainerbeforeshow");
+    tools.getCSRFToken('patients/new', function(success){
+        $("#edit-patient-form").show();
+    });
 });
 
 $(document).on('pagebeforeshow', '#events', function(){
