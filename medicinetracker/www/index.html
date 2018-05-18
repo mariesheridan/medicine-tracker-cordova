@@ -29,7 +29,7 @@
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
         <meta http-equiv="Content-Security-Policy"
-              content="default-src 'self' data: gap: https://ssl.gstatic.com https://polar-reaches-96790.herokuapp.com/ 'unsafe-eval';
+              content="default-src 'self' data: gap: https://ssl.gstatic.com https://polar-reaches-96790.herokuapp.com/ http://192.168.56.1:3000/ 'unsafe-eval';
                        script-src 'self' 'unsafe-inline' 'unsafe-eval';
                        style-src 'self' 'unsafe-inline';
                        media-src *;
@@ -42,6 +42,8 @@
         <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
+        <script type="text/javascript" src="js/tools.js"></script>
         <script type="text/javascript" src="js/medicinetracker.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <title>Medicine Tracker</title>
