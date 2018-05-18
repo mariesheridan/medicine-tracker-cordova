@@ -44,7 +44,7 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/storage.js"></script>
         <script type="text/javascript" src="js/tools.js"></script>
-        <script type="text/javascript" src="js/medicinetracker.js"></script>
+        <script type="text/javascript" src="js/eventbindings.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <title>Medicine Tracker</title>
     </head>
@@ -80,10 +80,11 @@
             </div>
             <div data-role="content">
                 <form id="edit-patient-form">
-                    <label for="patient-urn">URN:</label>
-                    <input type="text" name="urn" id="patient-urn">
-                    <label for="patient-name">Name:</label>
-                    <input type="text" name="name" id="patient-name">
+                    <label for="urn">URN:</label>
+                    <input type="text" name="urn">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name">
+                    <input type="submit" value="Submit">
                 </form>
             </div>
         </div>
