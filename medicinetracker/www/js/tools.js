@@ -1,12 +1,7 @@
 var tools = {
 
-    getURL: function(endpoint) {
-        var url = storage.baseURL + endpoint;
-        return url;
-    },
-
     getCSRFToken: function(endpoint, callback) {
-        var url = this.getURL(endpoint);
+        var url = ajaxHelper.getURL(endpoint);
 
         $.ajax({
             url: url,
@@ -32,18 +27,10 @@ var tools = {
     },
 
     getPatients: function() {
-
         var self = this;
-        var url = self.getURL('patients.json');
-
-        $.ajax({
-            url: url,
-            async: true,
-            success: function (result) {
+        ajaxHelper.getRequest('patients.json', function(result) {
+            if (result) {
                 self.populatePatientList(result);
-            },
-            error: function (request,error) {
-                alert('Network error has occurred please try again!');
             }
         });
     },
