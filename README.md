@@ -29,3 +29,11 @@
 1. Problem: `(node:11224) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'semver' of null`
 
    Solution: Remove Android API Level 27 from AVD Manager.
+
+2. Problem:
+   `error: device unauthorized.
+    This adb server's $ADB_VENDOR_KEYS is not set
+    Try 'adb kill-server' if that seems wrong.`
+
+   Solution:
+   In emulator, tick on "Allow USB Debugging."
