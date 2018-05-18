@@ -66,9 +66,25 @@
                 <div class="example-wrapper">
                     <ul data-role="listview" id="patient-list" data-inset="true" data-filter="true"></ul>
                 </div>
+                <a href="#edit-patient" class="ui-btn ui-corner-all">Add Patient</a>
             </div>
             <div data-role="footer" data-position="fixed">
                 <h1>Copyright 2017</h1>
+            </div>
+        </div>
+
+        <div data-role="page" id="edit-patient">
+            <div data-role="header" data-position="fixed">
+                <a href="#patients" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>Add Patient</h1>
+            </div>
+            <div data-role="content">
+                <form id="edit-patient-form">
+                    <label for="patient-urn">URN:</label>
+                    <input type="text" name="urn" id="patient-urn">
+                    <label for="patient-name">Name:</label>
+                    <input type="text" name="name" id="patient-name">
+                </form>
             </div>
         </div>
 

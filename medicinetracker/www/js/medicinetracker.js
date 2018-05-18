@@ -1,3 +1,7 @@
+$(document).on('pagebeforecreate', '#patients', function(){
+  var url = tools.getURL('');
+});
+
 $(document).on('pagecreate', '#patients', function(){
   var url = tools.getURL('patients.json');
 
