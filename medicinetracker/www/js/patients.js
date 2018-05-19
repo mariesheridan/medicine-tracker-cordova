@@ -13,7 +13,14 @@ var Patients = {
         var self = this;
         $('#patient-list').empty();
         $.each(result, function(i, row) {
-            $('#patient-list').append('<li><a class="patient-item" href="#view-patient" data-id="' + row.id + '"><h3>' + row.name + '</h3></a></li>');
+            var html =
+                '<li>' +
+                    '<a class="patient-item" href="#view-patient" data-id="' + row.id + '">' +
+                        '<h3>' + row.name + '</h3>' +
+                        '<p>URN: ' + row.urn + '</p>' +
+                    '</a>' +
+                '</li>';
+            $('#patient-list').append(html);
         });
         $('#patient-list').listview('refresh');
 
