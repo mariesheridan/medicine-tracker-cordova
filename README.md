@@ -54,3 +54,9 @@
 
    Solution:
    In emulator, tick on "Allow USB Debugging."
+
+3. Problem:
+    `cordova emulate android` takes a long time to finish. It seems stuck after "Built the following apk(s):"
+
+    Solution:
+    In emulator, uninstall the app, then run `cordova emulate android` again.
