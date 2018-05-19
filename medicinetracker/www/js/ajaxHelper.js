@@ -25,7 +25,7 @@ var AjaxHelper = {
     },
 
     getCSRFToken: function(endpoint, callback) {
-        var url = AjaxHelper.getURL(endpoint);
+        var url = this.getURL(endpoint);
 
         State.csrfToken = false;
 
@@ -45,6 +45,30 @@ var AjaxHelper = {
                 }
             },
             error: function (request,error) {
+                if ($.isFunction(callback)) {
+                    callback(false);
+                }
+            }
+        });
+    },
+
+    postRequest: function(endpoint, data, callback) {
+        var url = this.getURL(endpoint) +
+                  "?authenticity_token=" +
+                  State.csrfToken;
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            success: function (result) {
+                if ($.isFunction(callback)) {
+                    callback(result);
+                }
+            },
+            error: function (request,error) {
+                alert('Network error has occurred please try again!');
                 if ($.isFunction(callback)) {
                     callback(false);
                 }

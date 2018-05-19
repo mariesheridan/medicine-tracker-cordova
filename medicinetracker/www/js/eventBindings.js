@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('#edit-patient-form').submit(function(e){
         e.preventDefault();
+        Patients.sendPatientForm();
     });
 });
 
