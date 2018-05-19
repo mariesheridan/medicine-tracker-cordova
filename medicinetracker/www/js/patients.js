@@ -46,7 +46,7 @@ var Patients = {
         var endpoint = "patients/" + id + ".json";
         var patientJson = AjaxHelper.getRequest(endpoint, function(result) {
             if (result) {
-                var contentElement = $('#view-patient').find('[data-role="content"]').first();
+                var contentElement = $('#view-patient').find('.content-holder').first();
                 contentElement.empty();
 
                 var html =
