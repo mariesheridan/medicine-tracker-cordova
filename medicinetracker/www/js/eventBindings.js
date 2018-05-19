@@ -14,7 +14,7 @@ $(document).on('pagebeforeshow', '#patients', function(){
 
 $(document).on('pagebeforeshow', '#edit-patient', function(){
     $("#edit-patient-form").hide();
-    Tools.getCSRFToken('patients/new', function(success){
+    AjaxHelper.getCSRFToken('patients/new', function(success){
         $("#edit-patient-form").show();
     });
 });
