@@ -10,6 +10,7 @@ var Patients = {
     },
 
     populatePatientList: function(result) {
+        var self = this;
         $('#patient-list').empty();
         $.each(result, function(i, row) {
             $('#patient-list').append('<li><a class="patient-item" href="#view-patient" data-id="' + row.id + '"><h3>' + row.name + '</h3></a></li>');
@@ -19,9 +20,7 @@ var Patients = {
         $('.patient-item').off('click');
         $('.patient-item').on('click', function(){
             var patientID = $(this).data('id');
-            var contentElement = $('#view-patient').find('[data-role="content"]').first();
-            contentElement.empty();
-            contentElement.text("PatientID: " + patientID);
+            self.displayPatient(patientID);
         });
     },
 
@@ -39,6 +38,24 @@ var Patients = {
         AjaxHelper.postRequest('patients.json', jsonData, function(result){
             if (result) {
                 alert(name + " has been saved successfully.");
+            }
+        });
+    },
+
+    displayPatient: function(id) {
+        var endpoint = "patients/" + id + ".json";
+        var patientJson = AjaxHelper.getRequest(endpoint, function(result) {
+            if (result) {
+                var contentElement = $('#view-patient').find('[data-role="content"]').first();
+                contentElement.empty();
+
+                var html =
+                    "<div>" +
+                        "<p>ID: " + result.id + "</p>" +
+                        "<p>URN: " + result.urn + "</p>" +
+                        "<p>Name: " + result.name + "</p>" +
+                    "</div>";
+                contentElement.html(html);
             }
         });
     },
