@@ -44,8 +44,10 @@ var Patients = {
 
     displayPatient: function(id) {
         var endpoint = "patients/" + id + ".json";
+        State.patientObj = {};
         var patientJson = AjaxHelper.getRequest(endpoint, function(result) {
             if (result) {
+                State.patientObj = result;
                 var contentElement = $('#view-patient').find('.content-holder').first();
                 contentElement.empty();
 
@@ -56,6 +58,7 @@ var Patients = {
                         "<p>Name: " + result.name + "</p>" +
                     "</div>";
                 contentElement.html(html);
+                Medicines.populateMedicineList(result.medicines);
             }
         });
     },

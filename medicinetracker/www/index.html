@@ -45,6 +45,7 @@
         <script type="text/javascript" src="js/state.js"></script>
         <script type="text/javascript" src="js/ajaxHelper.js"></script>
         <script type="text/javascript" src="js/tools.js"></script>
+        <script type="text/javascript" src="js/medicines.js"></script>
         <script type="text/javascript" src="js/patients.js"></script>
         <script type="text/javascript" src="js/eventBindings.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -118,7 +119,19 @@
                 <h1>Medicines</h1>
             </div>
             <div data-role="content">
-                <ul data-role="listview" id="medicine-list" data-theme="a"></ul>
+                <ul data-role="listview" id="medicine-list" data-inset="true" data-filter="true"></ul>
+                <a href="#edit-medicine" class="ui-btn ui-corner-all">Add Medicine</a>
+            </div>
+        </div>
+
+        <div data-role="page" id="view-medicine">
+            <div data-role="header" data-position="fixed">
+                <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>View Medicine</h1>
+            </div>
+            <div data-role="content">
+                <div class="content-holder"></div>
+                <a href="#" class="ui-btn ui-corner-all">Edit Medicine</a>
             </div>
         </div>
     </body>
