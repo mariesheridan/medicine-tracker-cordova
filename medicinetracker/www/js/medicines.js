@@ -16,12 +16,34 @@ var Medicines = {
 
             $('#medicine-list').append(html);
         });
-        // $('#medicine-list').listview('refresh');
 
-        // $('.medicine-item').off('click');
-        // $('.medicine-item').on('click', function(){
-        //     var patientID = $(this).data('id');
-        //     self.displayPatient(patientID);
-        // });
+        $('.medicine-item').off('click');
+        $('.medicine-item').on('click', function(){
+            var medicineID = $(this).data('id');
+            self.displayMedicine(medicineID);
+        });
+    },
+
+    displayMedicine: function(id) {
+        var contentElement = $('#view-medicine').find('.content-holder').first();
+        contentElement.empty();
+        var medicines = State.patientObj.medicines;
+        var medicine = medicines.find(function(item){
+            return item.id == id;
+        });
+
+        if (medicine)
+        {
+            var html =
+                "<div>" +
+                    "<p>ID: " + medicine.id + "</p>" +
+                    "<p>Antibiotic: " + medicine.antibiotic + "</p>" +
+                    "<p>Start Date: " + medicine.start_date + "</p>" +
+                    "<p>End Date: " + medicine.end_date + "</p>" +
+                    "<p>Dose: " + medicine.dose + "</p>" +
+                    "<p>Frequency: " + medicine.frequency + "</p>" +
+                "</div>";
+            contentElement.html(html);
+        }
     },
 };
