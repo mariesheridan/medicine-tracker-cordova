@@ -29,7 +29,7 @@ var Medicines = {
         contentElement.empty();
         var medicines = State.patientObj.medicines;
         var medicine = medicines.find(function(item){
-            return item.id == id;
+            return item.id === id;
         });
 
         if (medicine)
