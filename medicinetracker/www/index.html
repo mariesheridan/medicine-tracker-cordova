@@ -54,14 +54,6 @@
 
         <div data-role="page" id="patients">
             <div data-role="header" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                      <li><a href="#patients" class="ui-btn-active ui-state-persist">Patients</a></li>
-                      <li><a href="#events">Events</a></li>
-                      <li><a href="#">Medicine</a></li>
-                      <li><a href="#">Report</a></li>
-                    </ul>
-                </div>
                 <h1>Patients</h1>
             </div>
             <div role="main" class="ui-content">
@@ -91,9 +83,26 @@
             </div>
         </div>
 
-        <div data-role="page" id="events">
+        <div data-role="page" id="view-patient">
             <div data-role="header" data-position="fixed">
                 <a href="#patients" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>View Patient</h1>
+                <div data-role="navbar">
+                    <ul>
+                      <li><a href="#view-patient" class="ui-btn-active ui-state-persist">Patient</a></li>
+                      <li><a href="#events">Events</a></li>
+                      <li><a href="#medicines">Medicine</a></li>
+                      <li><a href="#">Report</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">
+            </div>
+        </div>
+
+        <div data-role="page" id="events">
+            <div data-role="header" data-position="fixed">
+                <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
                 <h1>Events</h1>
             </div>
             <div data-role="content">
@@ -101,5 +110,14 @@
             </div>
         </div>
 
+        <div data-role="page" id="medicines">
+            <div data-role="header" data-position="fixed">
+                <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>Medicines</h1>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" id="medicine-list" data-theme="a"></ul>
+            </div>
+        </div>
     </body>
 </html>
