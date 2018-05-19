@@ -20,10 +20,10 @@ $(document).on('pagebeforeshow', '#edit-patient', function(){
     });
 });
 
-$(document).on('pageshow', '#events', function(){
+$(document).on('pagebeforeshow', '#events', function(){
     $('#event-list').listview('refresh');
 });
 
-$(document).on('pageshow', '#medicines', function(){
+$(document).on('pagebeforeshow', '#medicines', function(){
     $('#medicine-list').listview('refresh');
 });
