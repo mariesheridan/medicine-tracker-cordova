@@ -16,7 +16,7 @@ var Medicines = {
 
             $('#medicine-list').append(html);
         });
-        $('#medicine-list').listview('refresh');
+        // $('#medicine-list').listview('refresh');
 
         // $('.medicine-item').off('click');
         // $('.medicine-item').on('click', function(){

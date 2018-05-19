@@ -59,6 +59,7 @@ var Patients = {
                     "</div>";
                 contentElement.html(html);
                 Medicines.populateMedicineList(result.medicines);
+                Events.populateEventList(result.events);
             }
         });
     },
