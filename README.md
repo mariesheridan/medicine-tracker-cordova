@@ -21,11 +21,15 @@
 #### android ####
 1. `cd medicinetracker`
 
-2. `cordova add platform android`
+2. `npm install`
 
-3. Open project in Android Studio (medicine-tracker-cordova\medicinetracker\platforms\android). Accept the license agreement.
+3. `cordova add platform android`
 
-4. `cordova emulate android`
+4. `cordova prepare android`
+
+5. Open project in Android Studio (medicine-tracker-cordova\medicinetracker\platforms\android). Accept the license agreement.
+
+6. `cordova emulate android`
 
 ------
 
