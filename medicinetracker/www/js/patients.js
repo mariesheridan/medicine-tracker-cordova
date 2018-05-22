@@ -67,6 +67,7 @@ var Patients = {
                 contentElement.html(html);
                 Medicines.populateMedicineList(result.medicines);
                 Events.populateEventList(result.events);
+                Report.createReport(result.medicines, result.medicines);
             }
         });
     },
