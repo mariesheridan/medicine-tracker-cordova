@@ -52,7 +52,9 @@ var Report = {
             }
         ];
 
-        var options = {};
+        var options = {
+            editable: false
+        };
 
         var timeline = new vis.Timeline(container, items, groups, options);
     }
