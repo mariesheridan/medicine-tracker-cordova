@@ -39,9 +39,11 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
+        <link rel="stylesheet" type="text/css" href="../node_modules/vis/dist/vis.css">
         <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="../node_modules/vis/dist/vis.js"></script>
         <script type="text/javascript" src="js/state.js"></script>
         <script type="text/javascript" src="js/ajaxHelper.js"></script>
         <script type="text/javascript" src="js/tools.js"></script>
@@ -59,10 +61,10 @@
                 <h1>Patients</h1>
             </div>
             <div role="main" class="ui-content">
+                <a href="#edit-patient" class="ui-btn ui-corner-all">Add Patient</a>
                 <div class="example-wrapper">
                     <ul data-role="listview" id="patient-list" data-inset="true" data-filter="true"></ul>
                 </div>
-                <a href="#edit-patient" class="ui-btn ui-corner-all">Add Patient</a>
             </div>
             <div data-role="footer" data-position="fixed">
                 <h1>Copyright 2017</h1>
@@ -94,7 +96,7 @@
                       <li><a href="#view-patient" class="ui-btn-active ui-state-persist">Patient</a></li>
                       <li><a href="#events">Events</a></li>
                       <li><a href="#medicines">Medicine</a></li>
-                      <li><a href="#">Report</a></li>
+                      <li><a href="#report">Report</a></li>
                     </ul>
                 </div>
             </div>
@@ -145,6 +147,16 @@
             <div data-role="content">
                 <div class="content-holder"></div>
                 <a href="#" class="ui-btn ui-corner-all">Edit Medicine</a>
+            </div>
+        </div>
+
+        <div data-role="page" id="report">
+            <div data-role="header" data-position="fixed">
+                <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>Report</h1>
+            </div>
+            <div data-role="content">
+                <div class="content-holder"></div>
             </div>
         </div>
     </body>
