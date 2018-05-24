@@ -14,10 +14,11 @@ $(document).on('pagebeforeshow', '#patients', function(){
 });
 
 $(document).on('pagebeforeshow', '#edit-patient', function(){
-    $("#edit-patient-form").hide();
-    AjaxHelper.getCSRFToken('patients/new', function(success){
-        $("#edit-patient-form").show();
-    });
+    var form = $("#edit-patient-form");
+    var id = form.data("id");
+    if (id !== "0") {
+        Tools.populateForm(form, State.patientObj);
+    }
 });
 
 $(document).on('pagebeforeshow', '#events', function(){

@@ -10,6 +10,7 @@ var Patients = {
     },
 
     populatePatientList: function(result) {
+        this.clearPatientData();
         var self = this;
         $('#patient-list').empty();
         $.each(result, function(i, row) {
@@ -50,11 +51,11 @@ var Patients = {
     },
 
     displayPatient: function(id) {
+        var self = this;
         var endpoint = "patients/" + id + ".json";
-        State.patientObj = {};
         var patientJson = AjaxHelper.getRequest(endpoint, function(result) {
             if (result) {
-                State.patientObj = result;
+                self.setPatientData(result);
                 var contentElement = $('#view-patient').find('.content-holder').first();
                 contentElement.empty();
 
@@ -71,4 +72,14 @@ var Patients = {
             }
         });
     },
+
+    clearPatientData: function() {
+        State.patientObj = {};
+        $('#edit-patient-form').attr('data-id', 0);
+    },
+
+    setPatientData: function(patientData) {
+        State.patientObj = patientData;
+        $('#edit-patient-form').attr('data-id', patientData.id)
+    }
 };
