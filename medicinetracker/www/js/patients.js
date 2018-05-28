@@ -47,6 +47,7 @@ var Patients = {
             if (result) {
                 alert(name + " has been saved successfully.");
             }
+            $.mobile.navigate('#patients');
         });
     },
 

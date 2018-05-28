@@ -53,15 +53,13 @@ var AjaxHelper = {
     },
 
     postRequest: function(endpoint, data, callback) {
-        var url = this.getURL(endpoint) +
-                  "?authenticity_token=" +
-                  State.csrfToken;
+        var url = this.getURL(endpoint);
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: url,
             data: data,
-            dataType: "json",
+            contentType: 'application/json',
             success: function (result) {
                 if ($.isFunction(callback)) {
                     callback(result);
