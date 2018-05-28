@@ -33,18 +33,18 @@ var Patients = {
     },
 
     sendPatientForm: function() {
-        const formElement = $("#edit-patient-form");
-        const urn = formElement.find("input[name='urn']").first().val();
-        const name = formElement.find("input[name='name']").first().val();
-        const data = {
+        var formElement = $("#edit-patient-form");
+        var urn = formElement.find("input[name='urn']").first().val();
+        var name = formElement.find("input[name='name']").first().val();
+        var data = {
             urn: urn,
             name: name
         };
-        const jsonData = JSON.stringify(data);
-        const id = $(formElement).data('id');
+        var jsonData = JSON.stringify(data);
+        var id = State.patientObj.id;
 
-        if (id === "0") {
-            const url = 'patients.json';
+        if (!id) {
+            var url = 'patients.json';
             AjaxHelper.postRequest('patients.json', jsonData, function(result){
                 if (result) {
                     alert(name + " has been created successfully.");
@@ -52,7 +52,7 @@ var Patients = {
                 $.mobile.navigate('#patients');
             });
         } else {
-            const url = 'patients/' + id + '.json';
+            var url = 'patients/' + id + '.json';
             AjaxHelper.putRequest(url, jsonData, function(result){
                 if (result) {
                     alert(name + " has been updated successfully.");
@@ -87,11 +87,9 @@ var Patients = {
 
     clearPatientData: function() {
         State.patientObj = {};
-        $('#edit-patient-form').attr('data-id', 0);
     },
 
     setPatientData: function(patientData) {
         State.patientObj = patientData;
-        $('#edit-patient-form').attr('data-id', patientData.id)
     }
 };
