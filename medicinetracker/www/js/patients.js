@@ -33,22 +33,33 @@ var Patients = {
     },
 
     sendPatientForm: function() {
-        var formElement = $("#edit-patient-form");
-        var urn = formElement.find("input[name='urn']").first().val();
-        var name = formElement.find("input[name='name']").first().val();
-        var data = {
+        const formElement = $("#edit-patient-form");
+        const urn = formElement.find("input[name='urn']").first().val();
+        const name = formElement.find("input[name='name']").first().val();
+        const data = {
             urn: urn,
             name: name
         };
+        const jsonData = JSON.stringify(data);
+        const id = $(formElement).data('id');
 
-        var jsonData = JSON.stringify(data);
-
-        AjaxHelper.postRequest('patients.json', jsonData, function(result){
-            if (result) {
-                alert(name + " has been saved successfully.");
-            }
-            $.mobile.navigate('#patients');
-        });
+        if (id === "0") {
+            const url = 'patients.json';
+            AjaxHelper.postRequest('patients.json', jsonData, function(result){
+                if (result) {
+                    alert(name + " has been created successfully.");
+                }
+                $.mobile.navigate('#patients');
+            });
+        } else {
+            const url = 'patients/' + id + '.json';
+            AjaxHelper.putRequest(url, jsonData, function(result){
+                if (result) {
+                    alert(name + " has been updated successfully.");
+                }
+                $.mobile.navigate('#patients');
+            });
+        }
     },
 
     displayPatient: function(id) {
