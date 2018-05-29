@@ -79,15 +79,19 @@ var Patients = {
                     "</div>";
                 contentElement.html(html);
 
-                var promises = [];
-                promises.push(Medicines.getMedicines(result.id));
-                promises.push(Events.getEvents(result.id));
-                Promise.all(promises).then(function(results) {
-                    Medicines.populateMedicineList(results[0]);
-                    Events.populateEventList(results[1])
-                    Report.createReport(results[0], results[1]);
-                });
+                self.getPatientItems(result.id);
             }
+        });
+    },
+
+    getPatientItems: function(patientID) {
+        var promises = [];
+        promises.push(Medicines.getMedicines(patientID));
+        promises.push(Events.getEvents(patientID));
+        Promise.all(promises).then(function(results) {
+            Medicines.populateMedicineList(results[0]);
+            Events.populateEventList(results[1])
+            Report.createReport(results[0], results[1]);
         });
     },
 
