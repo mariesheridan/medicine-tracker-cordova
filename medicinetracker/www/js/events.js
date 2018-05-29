@@ -5,8 +5,10 @@ var Events = {
         var promise = new Promise(function(resolve, reject){
             AjaxHelper.getRequest(url, function(result) {
                 if (result) {
+                    State.events = result;
                     resolve(result);
                 } else {
+                    State.events = [];
                     resolve([]);
                 }
             });
@@ -42,7 +44,7 @@ var Events = {
     displayEvent: function(id) {
         var contentElement = $('#view-event').find('.content-holder').first();
         contentElement.empty();
-        var events = State.patientObj.events;
+        var events = State.events;
         var event = events.find(function(item){
             return item.id === id;
         });

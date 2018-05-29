@@ -5,8 +5,10 @@ var Medicines = {
         var promise = new Promise(function(resolve, reject){
             AjaxHelper.getRequest(url, function(result) {
                 if (result) {
+                    State.medicines = result;
                     resolve(result);
                 } else {
+                    State.medicines = [];
                     resolve([]);
                 }
             });
@@ -43,7 +45,7 @@ var Medicines = {
     displayMedicine: function(id) {
         var contentElement = $('#view-medicine').find('.content-holder').first();
         contentElement.empty();
-        var medicines = State.patientObj.medicines;
+        var medicines = State.medicines;
         var medicine = medicines.find(function(item){
             return item.id === id;
         });
