@@ -78,9 +78,15 @@ var Patients = {
                         "<p>Name: " + result.name + "</p>" +
                     "</div>";
                 contentElement.html(html);
-                Medicines.populateMedicineList(result.medicines);
-                Events.populateEventList(result.events);
-                Report.createReport(result.medicines, result.events);
+
+                var promises = [];
+                promises.push(Medicines.getMedicines(result.id));
+                promises.push(Events.getEvents(result.id));
+                Promise.all(promises).then(function(results) {
+                    Medicines.populateMedicineList(results[0]);
+                    Events.populateEventList(results[1])
+                    Report.createReport(results[0], results[1]);
+                });
             }
         });
     },

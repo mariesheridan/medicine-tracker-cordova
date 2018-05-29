@@ -1,4 +1,20 @@
 var Events = {
+    getEvents: function(patientID) {
+        var self = this;
+        var url = 'patients/' + patientID + '/events.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                if (result) {
+                    resolve(result);
+                } else {
+                    resolve([]);
+                }
+            });
+        });
+
+        return promise;
+    },
+
     populateEventList: function(events) {
         var self = this;
         $('#event-list').empty();

@@ -1,4 +1,20 @@
 var Medicines = {
+    getMedicines: function(patientID) {
+        var self = this;
+        var url = 'patients/' + patientID + '/medicines.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                if (result) {
+                    resolve(result);
+                } else {
+                    resolve([]);
+                }
+            });
+        });
+
+        return promise;
+    },
+
     populateMedicineList: function(medicines) {
         var self = this;
         $('#medicine-list').empty();
