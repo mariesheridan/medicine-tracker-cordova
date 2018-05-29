@@ -37,13 +37,16 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
         <link rel="stylesheet" type="text/css" href="css/vis.css">
+
         <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="lib/vis.js"></script>
+
         <script type="text/javascript" src="js/state.js"></script>
         <script type="text/javascript" src="js/ajaxHelper.js"></script>
         <script type="text/javascript" src="js/tools.js"></script>
@@ -75,10 +78,10 @@
         <div data-role="page" id="edit-patient">
             <div data-role="header" data-position="fixed">
                 <a href="#patients" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
-                <h1>Add Patient</h1>
+                <h1>Edit Patient</h1>
             </div>
             <div data-role="content">
-                <form id="edit-patient-form" data-id="0">
+                <form id="edit-patient-form">
                     <label for="urn">URN:</label>
                     <input type="text" name="urn">
                     <label for="name">Name:</label>
@@ -126,6 +129,41 @@
             <div data-role="content">
                 <div class="content-holder"></div>
                 <a href="#" class="ui-btn ui-corner-all">Edit Event</a>
+            </div>
+        </div>
+
+        <div data-role="page" id="edit-event">
+            <div data-role="header" data-position="fixed">
+                <a href="#events" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>Edit Event</h1>
+            </div>
+            <div data-role="content">
+                <form id="edit-event-form">
+                    <label for="event-reaction">Reaction:</label>
+                    <select name="reaction" id="event-reaction">
+                        <option value="1">The 1st Option</option>
+                        <option value="2">The 2nd Option</option>
+                        <option value="3">The 3rd Option</option>
+                        <option value="4">The 4th Option</option>
+                    </select>
+                    <label for="event-organ">Organ:</label>
+                    <select name="organ" id="event-organ">
+                        <option value="1">The 1st Option</option>
+                        <option value="2">The 2nd Option</option>
+                        <option value="3">The 3rd Option</option>
+                        <option value="4">The 4th Option</option>
+                    </select>
+                    <label for="event-date">Date:</label>
+                    <input type="text" data-role="date" id="event-date" name="event_date" data-inline="true">
+                    <label for="event-severity">Severity:</label>
+                    <select name="severity" id="event-severity">
+                        <option value="1">The 1st Option</option>
+                        <option value="2">The 2nd Option</option>
+                        <option value="3">The 3rd Option</option>
+                        <option value="4">The 4th Option</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
             </div>
         </div>
 
