@@ -62,4 +62,62 @@ var Events = {
             contentElement.html(html);
         }
     },
+
+    populateEventOptions: function(callback) {
+        var self = this;
+        var promises = [];
+        promises.push(self.getOrgans());
+
+        console.log('populateEventOptions');
+        Promise.all(promises).then(function(result){
+            callback();
+        });
+    },
+
+    getOrgans: function() {
+        console.log('getOrgans');
+        var self = this;
+        var url = 'organs.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                $('#event-organ').empty();
+                if (result) {
+                    self.populateOrgans(result);
+                }
+                console.log('getOrgans resolve called');
+                resolve(true);
+            });
+        });
+
+        return promise;
+    },
+
+    populateOrgans: function(organs) {
+        var length = organs.length;
+        const organValue = $('#event-organ').val();
+        for (let i = 0; i < length; i++) {
+            var name = organs[i].name;
+            const selected = (organValue === name) ? 'selected' : '';
+            console.log('populateOrgans: ' + name);
+            var html = '<option value="' + name +'" ' + selected + '>' + name + '</option>'
+            $('#event-organ').append(html);
+        }
+    },
+
+    populateReactions: function(organID) {
+
+    },
+
+    populateSeverities: function() {
+
+    },
+
+    clearEventOptions: function() {
+        $('#event-organ').val('');
+        $('#event-reaction').val('');
+        $('#event-severity').val('');
+        $('#event-organ').empty();
+        $('#event-reaction').empty();
+        $('#event-severity').empty();
+    }
 };
