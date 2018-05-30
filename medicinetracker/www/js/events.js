@@ -82,6 +82,7 @@ var Events = {
                 $('#event-organ').empty();
                 if (result) {
                     self.populateOrgans(result);
+                    self.bindOrganOptions();
                 }
                 resolve(true);
             });
@@ -94,13 +95,45 @@ var Events = {
         var length = organs.length;
         for (let i = 0; i < length; i++) {
             var name = organs[i].name;
-            var html = '<option value="' + name +'">' + name + '</option>'
+            var organID = organs[i].id;
+            var html = '<option value="' + name +'" data-id="' + organID + '">' + name + '</option>'
             $('#event-organ').append(html);
         }
     },
 
-    populateReactions: function(organID) {
+    bindOrganOptions: function() {
+        var self = this;
+        $('#event-organ').off('change');
+        $('#event-organ').on('change', function(){
+            const value = $(this).val();
+            const organID = $(this).find('option[value="' + value + '"]').first().data('id');
+            self.getReactions(organID);
+        });
+    },
 
+    getReactions: function(organID) {
+        var self = this;
+        var url = 'organs/' + organID +'/reactions.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                $('#event-reaction').empty();
+                if (result) {
+                    self.populateReactions(result);
+                }
+                resolve(true);
+            });
+        });
+
+        return promise;
+    },
+
+    populateReactions: function(reactions) {
+        var length = reactions.length;
+        for (let i = 0; i < length; i++) {
+            var name = reactions[i].name;
+            var html = '<option value="' + name +'">' + name + '</option>'
+            $('#event-reaction').append(html);
+        }
     },
 
     getSeverities: function() {
