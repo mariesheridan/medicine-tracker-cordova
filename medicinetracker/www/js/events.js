@@ -67,15 +67,14 @@ var Events = {
         var self = this;
         var promises = [];
         promises.push(self.getOrgans());
+        promises.push(self.getSeverities());
 
-        console.log('populateEventOptions');
         Promise.all(promises).then(function(result){
             callback();
         });
     },
 
     getOrgans: function() {
-        console.log('getOrgans');
         var self = this;
         var url = 'organs.json'
         var promise = new Promise(function(resolve, reject){
@@ -84,7 +83,6 @@ var Events = {
                 if (result) {
                     self.populateOrgans(result);
                 }
-                console.log('getOrgans resolve called');
                 resolve(true);
             });
         });
@@ -94,12 +92,9 @@ var Events = {
 
     populateOrgans: function(organs) {
         var length = organs.length;
-        var organValue = $('#event-organ').val();
         for (let i = 0; i < length; i++) {
             var name = organs[i].name;
-            var selected = (organValue === name) ? 'selected' : '';
-            console.log('populateOrgans: ' + name);
-            var html = '<option value="' + name +'" ' + selected + '>' + name + '</option>'
+            var html = '<option value="' + name +'">' + name + '</option>'
             $('#event-organ').append(html);
         }
     },
@@ -108,8 +103,29 @@ var Events = {
 
     },
 
-    populateSeverities: function() {
+    getSeverities: function() {
+        var self = this;
+        var url = 'severities.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                $('#event-severity').empty();
+                if (result) {
+                    self.populateSeverities(result);
+                }
+                resolve(true);
+            });
+        });
 
+        return promise;
+    },
+
+    populateSeverities: function(severities) {
+        var length = severities.length;
+        for (let i = 0; i < length; i++) {
+            var name = severities[i].name;
+            var html = '<option value="' + name +'">' + name + '</option>'
+            $('#event-severity').append(html);
+        }
     },
 
     clearEventOptions: function() {

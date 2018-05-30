@@ -24,13 +24,11 @@ $(document).on('pagebeforeshow', '#edit-patient', function(){
 $(document).on('pagebeforeshow', '#edit-event', function(){
     var form = $("#edit-event-form");
     var id = form.data("id");
-    console.log('edit-event');
     form.hide();
     if (id !== "0") {
         Tools.populateForm(form, State.eventObj);
     }
     Events.populateEventOptions(function(){
-        console.log('populateEventOptions callback');
         form.show();
     });
 });
