@@ -94,10 +94,10 @@ var Events = {
 
     populateOrgans: function(organs) {
         var length = organs.length;
-        const organValue = $('#event-organ').val();
+        var organValue = $('#event-organ').val();
         for (let i = 0; i < length; i++) {
             var name = organs[i].name;
-            const selected = (organValue === name) ? 'selected' : '';
+            var selected = (organValue === name) ? 'selected' : '';
             console.log('populateOrgans: ' + name);
             var html = '<option value="' + name +'" ' + selected + '>' + name + '</option>'
             $('#event-organ').append(html);
@@ -116,8 +116,13 @@ var Events = {
         $('#event-organ').val('');
         $('#event-reaction').val('');
         $('#event-severity').val('');
+
         $('#event-organ').empty();
         $('#event-reaction').empty();
         $('#event-severity').empty();
+
+        $('#event-organ').parent().find('span').first().html('&nbsp;');
+        $('#event-reaction').parent().find('span').first().html('&nbsp;');
+        $('#event-severity').parent().find('span').first().html('&nbsp;');
     }
 };
