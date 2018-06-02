@@ -3,6 +3,11 @@ $(document).ready(function(){
         e.preventDefault();
         Patients.sendPatientForm();
     });
+
+    $('#edit-event-form').submit(function(e){
+        e.preventDefault();
+        Events.sendEventForm(State.patientID, State.eventID);
+    });
 });
 
 $(document).on('pagebeforecreate', '#patients', function(){

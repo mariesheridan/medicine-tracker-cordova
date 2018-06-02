@@ -37,8 +37,41 @@ var Events = {
         $('.event-item').off('click');
         $('.event-item').on('click', function(){
             var eventID = $(this).data('id');
+            State.eventID = eventID;
             self.displayEvent(eventID);
         });
+    },
+
+    sendEventForm: function(patientID, eventID) {
+        var formElement = $("#edit-event-form");
+        let data = {};
+        $(formElement).find('input').each(function(){
+            const name = $(this).attr('name');
+            data[name] = $(this).val();
+        });
+        $(formElement).find('select').each(function(){
+            const name = $(this).attr('name');
+            data[name] = $(this).val();
+        });
+        var jsonData = JSON.stringify(data);
+
+        if (!eventID) {
+            var url = 'patients/' + patientID + '/events.json';
+            AjaxHelper.postRequest(url, jsonData, function(result){
+                if (result) {
+                    alert(name + " has been created successfully.");
+                }
+                $.mobile.navigate('#events');
+            });
+        } else {
+            var url = 'patients/' + patientID + '/events/' + eventID + '.json';
+            AjaxHelper.putRequest(url, jsonData, function(result){
+                if (result) {
+                    alert(name + " has been updated successfully.");
+                }
+                $.mobile.navigate('#events');
+            });
+        }
     },
 
     displayEvent: function(id) {

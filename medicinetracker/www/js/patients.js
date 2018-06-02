@@ -28,6 +28,7 @@ var Patients = {
         $('.patient-item').off('click');
         $('.patient-item').on('click', function(){
             var patientID = $(this).data('id');
+            State.patientID = patientID;
             self.displayPatient(patientID);
         });
     },
