@@ -93,11 +93,23 @@ var Events = {
 
     populateOrgans: function(organs) {
         var length = organs.length;
+        const selector = '#event-organ';
+        $(selector).empty();
+        const emptyHtml = '<option value="" data-id="0">Please choose one.</option>';
+        $(selector).append(emptyHtml);
         for (let i = 0; i < length; i++) {
-            var name = organs[i].name;
-            var organID = organs[i].id;
-            var html = '<option value="' + name +'" data-id="' + organID + '">' + name + '</option>'
-            $('#event-organ').append(html);
+            const name = organs[i].name;
+            const organID = organs[i].id;
+            const html = '<option value="' + name +'" data-id="' + organID + '">' + name + '</option>'
+            $(selector).append(html);
+        }
+        $(selector).selectmenu('refresh');
+
+        if ($(selector).val() === "") {
+            const selectOrgan = '<option value="" data-id="0">Please select organ first.</option>';
+            $('#event-reaction').empty();
+            $('#event-reaction').append(selectOrgan);
+            $('#event-reaction').selectmenu('refresh');
         }
     },
 
@@ -107,7 +119,10 @@ var Events = {
         $('#event-organ').on('change', function(){
             const value = $(this).val();
             const organID = $(this).find('option[value="' + value + '"]').first().data('id');
+            $('#event-reaction').val('');
             self.getReactions(organID);
+
+            $('#event-organ').selectmenu('refresh');
         });
     },
 
@@ -129,11 +144,16 @@ var Events = {
 
     populateReactions: function(reactions) {
         var length = reactions.length;
+        const selector = '#event-reaction';
+        $(selector).empty();
+        const emptyHtml = '<option value="" data-id="0">Please choose one.</option>';
+        $(selector).append(emptyHtml);
         for (let i = 0; i < length; i++) {
-            var name = reactions[i].name;
-            var html = '<option value="' + name +'">' + name + '</option>'
-            $('#event-reaction').append(html);
+            const name = reactions[i].name;
+            const html = '<option value="' + name +'">' + name + '</option>'
+            $(selector).append(html);
         }
+        $(selector).selectmenu('refresh');
     },
 
     getSeverities: function() {
@@ -154,11 +174,16 @@ var Events = {
 
     populateSeverities: function(severities) {
         var length = severities.length;
+        const selector = '#event-severity';
+        $(selector).empty();
+        const emptyHtml = '<option value="" data-id="0">Please choose one.</option>';
+        $(selector).append(emptyHtml);
         for (let i = 0; i < length; i++) {
-            var name = severities[i].name;
-            var html = '<option value="' + name +'">' + name + '</option>'
-            $('#event-severity').append(html);
+            const name = severities[i].name;
+            const html = '<option value="' + name +'">' + name + '</option>'
+            $(selector).append(html);
         }
+        $(selector).selectmenu('refresh');
     },
 
     clearEventOptions: function() {
@@ -170,8 +195,8 @@ var Events = {
         $('#event-reaction').empty();
         $('#event-severity').empty();
 
-        $('#event-organ').parent().find('span').first().html('&nbsp;');
-        $('#event-reaction').parent().find('span').first().html('&nbsp;');
-        $('#event-severity').parent().find('span').first().html('&nbsp;');
+        $('#event-organ').selectmenu('refresh');
+        $('#event-reaction').selectmenu('refresh');
+        $('#event-severity').selectmenu('refresh');
     }
 };
