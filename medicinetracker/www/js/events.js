@@ -61,7 +61,9 @@ var Events = {
                 if (result) {
                     alert(name + " has been created successfully.");
                 }
-                $.mobile.navigate('#events');
+                Patients.getPatientItems(patientID, function(){
+                    $.mobile.navigate('#events');
+                });
             });
         } else {
             var url = 'patients/' + patientID + '/events/' + eventID + '.json';
@@ -69,7 +71,9 @@ var Events = {
                 if (result) {
                     alert(name + " has been updated successfully.");
                 }
-                $.mobile.navigate('#events');
+                Patients.getPatientItems(patientID, function(){
+                    $.mobile.navigate('#events');
+                });
             });
         }
     },

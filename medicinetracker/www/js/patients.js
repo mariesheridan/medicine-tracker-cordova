@@ -80,12 +80,12 @@ var Patients = {
                     "</div>";
                 contentElement.html(html);
 
-                self.getPatientItems(result.id);
+                self.getPatientItems(result.id, function(){});
             }
         });
     },
 
-    getPatientItems: function(patientID) {
+    getPatientItems: function(patientID, callback) {
         var promises = [];
         promises.push(Medicines.getMedicines(patientID));
         promises.push(Events.getEvents(patientID));
@@ -93,6 +93,7 @@ var Patients = {
             Medicines.populateMedicineList(results[0]);
             Events.populateEventList(results[1])
             Report.createReport(results[0], results[1]);
+            callback();
         });
     },
 
