@@ -137,6 +137,7 @@ var Events = {
             const html = '<option value="' + name +'" data-id="' + organID + '">' + name + '</option>'
             $(selector).append(html);
         }
+        $(selector).selectmenu('refresh');
 
         this.setReactionsDropdown(organs, function(){});
     },
@@ -145,9 +146,11 @@ var Events = {
         const selector = '#event-organ';
         const selectedOrgan = $(selector).val();
         if (selectedOrgan === "") {
+            const reactionSelector = '#event-reaction';
             const selectOrgan = '<option value="" data-id="0">Please select organ first.</option>';
-            $('#event-reaction').empty();
-            $('#event-reaction').append(selectOrgan);
+            $(reactionSelector).empty();
+            $(reactionSelector).append(selectOrgan);
+            $(reactionSelector).selectmenu('refresh');
             callback();
         } else {
             const organ = organs.find(function(item){
