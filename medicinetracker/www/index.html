@@ -83,9 +83,9 @@
             <div data-role="content">
                 <form id="edit-patient-form">
                     <label for="urn">URN:</label>
-                    <input type="text" name="urn">
+                    <input type="text" name="urn" required>
                     <label for="name">Name:</label>
-                    <input type="text" name="name">
+                    <input type="text" name="name" required>
                     <input type="submit" value="Submit">
                 </form>
             </div>
@@ -140,13 +140,13 @@
             <div data-role="content">
                 <form id="edit-event-form">
                     <label for="event-organ">Organ:</label>
-                    <select name="organ" id="event-organ"></select>
+                    <select name="organ" id="event-organ" required></select>
                     <label for="event-reaction">Reaction:</label>
-                    <select name="reaction" id="event-reaction"></select>
+                    <select name="reaction" id="event-reaction" required></select>
                     <label for="event-date">Date:</label>
-                    <input type="datetime-local" data-role="date" id="event-date" name="event_date" data-inline="true">
+                    <input type="datetime-local" data-role="date" id="event-date" name="event_date" data-inline="true" required>
                     <label for="event-severity">Severity:</label>
-                    <select name="severity" id="event-severity"></select>
+                    <select name="severity" id="event-severity" required></select>
                     <input type="submit" value="Submit">
                 </form>
             </div>
