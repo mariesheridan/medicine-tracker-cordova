@@ -46,7 +46,15 @@ var Report = {
         ];
 
         var options = {
-            editable: false
+            editable: false,
+            timeAxis: {
+                scale: 'minute',
+                step: 30
+            },
+            zoomable: false,
+            horizontalScroll: true,
+            stack: true,
+            focus: true
         };
 
         var timeline = new vis.Timeline(container, items, groups, options);
