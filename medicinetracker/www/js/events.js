@@ -260,5 +260,20 @@ var Events = {
 
     setEventData: function(eventData) {
         State.eventObj = eventData;
+    },
+
+    deleteEvent: function(patientID, eventID, reaction) {
+        if (confirm("Delete " + reaction + "?")) {
+            const url = 'patients/' + patientID + '/events/' + eventID + ".json";
+            AjaxHelper.deleteRequest(url, {}, function(result){
+                if (result) {
+                    alert(reaction + " has been deleted successfully.");
+                }
+                Patients.getPatientItems(patientID, function(){
+                    const navigateToPage = '#events';
+                    $.mobile.navigate(navigateToPage);
+                });
+            });
+        }
     }
 };

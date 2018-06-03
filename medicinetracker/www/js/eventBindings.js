@@ -21,6 +21,9 @@ $(document).ready(function(){
             case "patient":
                 Patients.deletePatient(State.patientObj.id, State.patientObj.name);
                 break;
+            case "event":
+                Events.deleteEvent(State.patientObj.id, State.eventObj.id, State.eventObj.reaction);
+                break;
             case "medicine":
                 Medicines.deleteMedicine(State.patientObj.id, State.medicineObj.id, State.medicineObj.antibiotic);
                 break;
