@@ -34,15 +34,11 @@ var Patients = {
     },
 
     sendPatientForm: function() {
-        var formElement = $("#edit-patient-form");
-        var urn = formElement.find("input[name='urn']").first().val();
-        var name = formElement.find("input[name='name']").first().val();
-        var data = {
-            urn: urn,
-            name: name
-        };
-        var jsonData = JSON.stringify(data);
-        var id = State.patientObj.id;
+        const formSelector = '#edit-patient-form';
+        const jsonData = Tools.getFormJSONData(formSelector);
+        const name = $(formSelector).find('[name="name"]').first().val();
+        const id = State.patientObj.id;
+        const navigateToPage = '#patients';
 
         if (!id) {
             var url = 'patients.json';
@@ -50,7 +46,7 @@ var Patients = {
                 if (result) {
                     alert(name + " has been created successfully.");
                 }
-                $.mobile.navigate('#patients');
+                $.mobile.navigate(navigateToPage);
             });
         } else {
             var url = 'patients/' + id + '.json';
@@ -58,7 +54,7 @@ var Patients = {
                 if (result) {
                     alert(name + " has been updated successfully.");
                 }
-                $.mobile.navigate('#patients');
+                $.mobile.navigate(navigateToPage);
             });
         }
     },

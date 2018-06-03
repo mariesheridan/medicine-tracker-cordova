@@ -43,19 +43,10 @@ var Events = {
     },
 
     sendEventForm: function(patientID, eventID) {
-        var formElement = $("#edit-event-form");
-        let data = {};
-        $(formElement).find('input').each(function(){
-            const name = $(this).attr('name');
-            data[name] = $(this).val();
-        });
-        $(formElement).find('select').each(function(){
-            const name = $(this).attr('name');
-            data[name] = $(this).val();
-        });
-        var jsonData = JSON.stringify(data);
-
-        const reaction = $(formElement).find('[name="reaction"]').first().val();
+        const formSelector = '#edit-event-form';
+        const jsonData = Tools.getFormJSONData(formSelector);
+        const reaction = $(formSelector).find('[name="reaction"]').first().val();
+        const navigateToPage = '#events';
 
         if (!eventID) {
             var url = 'patients/' + patientID + '/events.json';
@@ -64,7 +55,7 @@ var Events = {
                     alert(reaction + " has been created successfully.");
                 }
                 Patients.getPatientItems(patientID, function(){
-                    $.mobile.navigate('#events');
+                    $.mobile.navigate(navigateToPage);
                 });
             });
         } else {
@@ -74,7 +65,7 @@ var Events = {
                     alert(reaction + " has been updated successfully.");
                 }
                 Patients.getPatientItems(patientID, function(){
-                    $.mobile.navigate('#events');
+                    $.mobile.navigate(navigateToPage);
                 });
             });
         }
