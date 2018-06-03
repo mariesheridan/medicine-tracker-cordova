@@ -17,6 +17,16 @@
 ======
 ### Run the App ###
 
+To set the URL to be used:
+
+1. Change the value of baseURL in www/js/state.js. Make sure to keep the slash at the end.
+
+2. Add the URL in this line in www/index.html, before the semicolon. Those are the only URLs that the app can access.
+
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' data: gap: https://ssl.gstatic.com https://polar-reaches-96790.herokuapp.com/ http://192.168.56.1:3000/ 'unsafe-eval';
+
+
 ------
 #### android ####
 1. `cd medicinetracker`
