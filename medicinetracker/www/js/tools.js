@@ -2,7 +2,13 @@ var Tools = {
     populateForm: function(formSelector, data) {
         $(formSelector).find('input').each(function(){
             const key = $(this).attr('name');
-            $(this).val(data[key]);
+            const value = data[key];
+            if ($(this).attr('type') === 'datetime-local') {
+                const date = moment(value).format('YYYY-MM-DDTHH:mm');
+                $(this).val(date);
+            } else {
+                $(this).val(value);
+            }
         });
         $(formSelector).find('select').each(function(){
             const key = $(this).attr('name');
