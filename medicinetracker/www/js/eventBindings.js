@@ -18,8 +18,11 @@ $(document).ready(function(){
     $('.delete-btn').on('click', function(e){
         const type = $(this).data('type');
         switch (type) {
+            case "patient":
+                Patients.deletePatient(State.patientObj.id, State.patientObj.name);
+                break;
             case "medicine":
-                Medicines.deleteMedicine(State.patientID, State.medicineObj.id, State.medicineObj.antibiotic);
+                Medicines.deleteMedicine(State.patientObj.id, State.medicineObj.id, State.medicineObj.antibiotic);
                 break;
             default:
                 console.log("Deleting unsupported type");

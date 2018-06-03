@@ -100,5 +100,18 @@ var Patients = {
 
     setPatientData: function(patientData) {
         State.patientObj = patientData;
+    },
+
+    deletePatient: function(patientID, name) {
+        if (confirm("Delete " + name + "?")) {
+            const url = 'patients/' + patientID + ".json";
+            AjaxHelper.deleteRequest(url, {}, function(result){
+                if (result) {
+                    alert(name + " has been deleted successfully.");
+                }
+                const navigateToPage = '#patients';
+                $.mobile.navigate(navigateToPage);
+            });
+        }
     }
 };
