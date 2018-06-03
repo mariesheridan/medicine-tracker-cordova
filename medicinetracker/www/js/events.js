@@ -55,11 +55,13 @@ var Events = {
         });
         var jsonData = JSON.stringify(data);
 
+        const reaction = $(formElement).find('[name="reaction"]').first().val();
+
         if (!eventID) {
             var url = 'patients/' + patientID + '/events.json';
             AjaxHelper.postRequest(url, jsonData, function(result){
                 if (result) {
-                    alert(name + " has been created successfully.");
+                    alert(reaction + " has been created successfully.");
                 }
                 Patients.getPatientItems(patientID, function(){
                     $.mobile.navigate('#events');
@@ -69,7 +71,7 @@ var Events = {
             var url = 'patients/' + patientID + '/events/' + eventID + '.json';
             AjaxHelper.putRequest(url, jsonData, function(result){
                 if (result) {
-                    alert(name + " has been updated successfully.");
+                    alert(reaction + " has been updated successfully.");
                 }
                 Patients.getPatientItems(patientID, function(){
                     $.mobile.navigate('#events');
