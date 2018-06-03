@@ -39,8 +39,38 @@ var Medicines = {
         $('.medicine-item').off('click');
         $('.medicine-item').on('click', function(){
             var medicineID = $(this).data('id');
+            State.medicineID = medicineID;
             self.displayMedicine(medicineID);
         });
+    },
+
+    sendMedicineForm: function(patientID, medicineID) {
+        const formSelector = '#edit-medicine-form';
+        const jsonData = Tools.getFormJSONData(formSelector);
+        const antibiotic = $(formSelector).find('[name="antibiotic"]').first().val();
+        const navigateToPage = '#medicines';
+
+        if (!medicineID) {
+            var url = 'patients/' + patientID + '/medicines.json';
+            AjaxHelper.postRequest(url, jsonData, function(result){
+                if (result) {
+                    alert(antibiotic + " has been created successfully.");
+                }
+                Patients.getPatientItems(patientID, function(){
+                    $.mobile.navigate(navigateToPage);
+                });
+            });
+        } else {
+            var url = 'patients/' + patientID + '/medicines/' + medicineID + '.json';
+            AjaxHelper.putRequest(url, jsonData, function(result){
+                if (result) {
+                    alert(antibiotic + " has been updated successfully.");
+                }
+                Patients.getPatientItems(patientID, function(){
+                    $.mobile.navigate(navigateToPage);
+                });
+            });
+        }
     },
 
     displayMedicine: function(id) {

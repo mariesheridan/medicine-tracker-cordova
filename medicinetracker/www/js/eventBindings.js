@@ -8,6 +8,11 @@ $(document).ready(function(){
         e.preventDefault();
         Events.sendEventForm(State.patientID, State.eventID);
     });
+
+    $('#edit-medicine-form').submit(function(e){
+        e.preventDefault();
+        Medicines.sendMedicineForm(State.patientID, State.medicineID);
+    });
 });
 
 $(document).on('pagebeforecreate', '#patients', function(){
@@ -70,6 +75,6 @@ $(document).on('pagebeforeshow', '#edit-medicine', function(){
     });
 });
 
-$(document).on('pagebeforehide', '#edit-event', function(){
-    Events.clearEventOptions();
+$(document).on('pagebeforehide', '#edit-medicine', function(){
+    Medicines.clearMedicineOptions();
 });
