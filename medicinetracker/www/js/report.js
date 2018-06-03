@@ -53,8 +53,7 @@ var Report = {
             },
             zoomable: false,
             horizontalScroll: true,
-            stack: true,
-            focus: true
+            stack: true
         };
 
         var timeline = new vis.Timeline(container, items, groups, options);
