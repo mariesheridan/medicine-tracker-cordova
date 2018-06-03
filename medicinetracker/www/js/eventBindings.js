@@ -19,22 +19,27 @@ $(document).on('pagebeforeshow', '#patients', function(){
 });
 
 $(document).on('pagebeforeshow', '#edit-patient', function(){
-    var form = $("#edit-patient-form");
-    var id = form.data("id");
-    if (id !== "0") {
-        Tools.populateForm(form, State.patientObj);
+    const formSelector = '#edit-patient-form';
+    if (State.patientID) {
+        Tools.populateForm(formSelector, State.patientObj);
     }
 });
 
 $(document).on('pagebeforeshow', '#edit-event', function(){
-    var form = $("#edit-event-form");
-    var id = form.data("id");
+    const formSelector = '#edit-event-form';
+    const form = $(formSelector);
     form.hide();
-    if (id !== "0") {
-        Tools.populateForm(form, State.eventObj);
-    }
+
     Events.populateEventOptions(function(){
-        form.show();
+        if (State.eventID) {
+            Tools.populateForm(formSelector, State.eventObj);
+            Events.setReactionsDropdown(State.organs, function(){
+                Tools.updateSelectValue('#event-reaction', State.eventObj.reaction);
+                form.show();
+            });
+        } else {
+            form.show();
+        }
     });
 });
 
@@ -43,9 +48,11 @@ $(document).on('pagebeforehide', '#edit-event', function(){
 });
 
 $(document).on('pagebeforeshow', '#events', function(){
+    State.eventID = 0;
     $('#event-list').listview('refresh');
 });
 
 $(document).on('pagebeforeshow', '#medicines', function(){
+    State.medicineID = 0;
     $('#medicine-list').listview('refresh');
 });

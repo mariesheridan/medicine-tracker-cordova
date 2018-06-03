@@ -19,6 +19,7 @@ var Events = {
 
     populateEventList: function(events) {
         var self = this;
+        self.clearEventData();
         $('#event-list').empty();
         $.each(events, function(i, row) {
             var html =
@@ -81,6 +82,7 @@ var Events = {
 
         if (event)
         {
+            this.setEventData(event);
             var html =
                 "<div>" +
                     "<p>ID: " + event.id + "</p>" +
@@ -106,11 +108,13 @@ var Events = {
 
     getOrgans: function() {
         var self = this;
-        var url = 'organs.json'
+        var url = 'organs.json';
+        State.organs = [];
         var promise = new Promise(function(resolve, reject){
             AjaxHelper.getRequest(url, function(result) {
                 $('#event-organ').empty();
                 if (result) {
+                    State.organs = result;
                     self.populateOrgans(result);
                     self.bindOrganOptions();
                 }
@@ -133,13 +137,23 @@ var Events = {
             const html = '<option value="' + name +'" data-id="' + organID + '">' + name + '</option>'
             $(selector).append(html);
         }
-        $(selector).selectmenu('refresh');
 
-        if ($(selector).val() === "") {
+        this.setReactionsDropdown(organs, function(){});
+    },
+
+    setReactionsDropdown: function(organs, callback) {
+        const selector = '#event-organ';
+        const selectedOrgan = $(selector).val();
+        if (selectedOrgan === "") {
             const selectOrgan = '<option value="" data-id="0">Please select organ first.</option>';
             $('#event-reaction').empty();
             $('#event-reaction').append(selectOrgan);
-            $('#event-reaction').selectmenu('refresh');
+            callback();
+        } else {
+            const organ = organs.find(function(item){
+                return item.name === selectedOrgan;
+            });
+            this.updateReactions(organ.id, callback);
         }
     },
 
@@ -150,9 +164,16 @@ var Events = {
             const value = $(this).val();
             const organID = $(this).find('option[value="' + value + '"]').first().data('id');
             $('#event-reaction').val('');
-            self.getReactions(organID);
+            self.updateReactions(organID);
+        });
+    },
 
-            $('#event-organ').selectmenu('refresh');
+    updateReactions: function(organID, callback) {
+        let promises = [];
+        promises.push(this.getReactions(organID));
+        Promise.all(promises).then(function(result){
+            $('#event-reaction').selectmenu('refresh');
+            callback();
         });
     },
 
@@ -228,5 +249,13 @@ var Events = {
         $('#event-organ').selectmenu('refresh');
         $('#event-reaction').selectmenu('refresh');
         $('#event-severity').selectmenu('refresh');
+    },
+
+    clearEventData: function() {
+        State.eventObj = {};
+    },
+
+    setEventData: function(eventData) {
+        State.eventObj = eventData;
     }
 };

@@ -1,8 +1,13 @@
 var Tools = {
-    populateForm: function(form, data) {
-        form.find("input").each(function(){
-            var key = $(this).attr('name');
+    populateForm: function(formSelector, data) {
+        $(formSelector).find('input').each(function(){
+            const key = $(this).attr('name');
             $(this).val(data[key]);
+        });
+        $(formSelector).find('select').each(function(){
+            const key = $(this).attr('name');
+            $(this).val(data[key]);
+            $(this).selectmenu('refresh');
         });
     },
 
@@ -20,5 +25,11 @@ var Tools = {
         const jsonData = JSON.stringify(data);
 
         return jsonData;
+    },
+
+    updateSelectValue: function(selector, value) {
+        let selectElement = $(selector);
+        selectElement.val(value);
+        selectElement.selectmenu('refresh');
     }
 };

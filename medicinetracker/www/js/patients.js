@@ -2,6 +2,7 @@ var Patients = {
 
     getPatients: function() {
         var self = this;
+        State.patientID = 0;
         AjaxHelper.getRequest('patients.json', function(result) {
             if (result) {
                 self.populatePatientList(result);
