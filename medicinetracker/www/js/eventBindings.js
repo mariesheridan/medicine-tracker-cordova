@@ -25,6 +25,11 @@ $(document).on('pagebeforeshow', '#edit-patient', function(){
     }
 });
 
+$(document).on('pagebeforeshow', '#events', function(){
+    State.eventID = 0;
+    $('#event-list').listview('refresh');
+});
+
 $(document).on('pagebeforeshow', '#edit-event', function(){
     const formSelector = '#edit-event-form';
     const form = $(formSelector);
@@ -47,12 +52,24 @@ $(document).on('pagebeforehide', '#edit-event', function(){
     Events.clearEventOptions();
 });
 
-$(document).on('pagebeforeshow', '#events', function(){
-    State.eventID = 0;
-    $('#event-list').listview('refresh');
-});
-
 $(document).on('pagebeforeshow', '#medicines', function(){
     State.medicineID = 0;
     $('#medicine-list').listview('refresh');
+});
+
+$(document).on('pagebeforeshow', '#edit-medicine', function(){
+    const formSelector = '#edit-medicine-form';
+    const form = $(formSelector);
+    form.hide();
+
+    Medicines.populateMedicineOptions(function(){
+        if (State.medicineID) {
+            Tools.populateForm(formSelector, State.medicineObj);
+        }
+        form.show();
+    });
+});
+
+$(document).on('pagebeforehide', '#edit-event', function(){
+    Events.clearEventOptions();
 });

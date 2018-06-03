@@ -64,4 +64,129 @@ var Medicines = {
             contentElement.html(html);
         }
     },
+
+    populateMedicineOptions: function(callback) {
+        var self = this;
+        var promises = [];
+        promises.push(self.getAntibiotics());
+        promises.push(self.getDoses());
+        promises.push(self.getFrequencies());
+
+        Promise.all(promises).then(function(result){
+            callback();
+        });
+    },
+
+    getAntibiotics: function() {
+        var self = this;
+        var url = 'antibiotics.json';
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                $('#medicine-antibiotic').empty();
+                if (result) {
+                    self.populateAntibiotics(result);
+                }
+                resolve(true);
+            });
+        });
+
+        return promise;
+    },
+
+    populateAntibiotics: function(antibiotics) {
+        var length = antibiotics.length;
+        const selector = '#medicine-antibiotic';
+        $(selector).empty();
+        const emptyHtml = '<option value="" data-id="0">Please choose one.</option>';
+        $(selector).append(emptyHtml);
+        for (let i = 0; i < length; i++) {
+            const name = antibiotics[i].name;
+            const html = '<option value="' + name +'">' + name + '</option>'
+            $(selector).append(html);
+        }
+        $(selector).selectmenu('refresh');
+
+    },
+
+    getDoses: function() {
+        var self = this;
+        var url = 'doses.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                $('#medicine-dose').empty();
+                if (result) {
+                    self.populateDoses(result);
+                }
+                resolve(true);
+            });
+        });
+
+        return promise;
+    },
+
+    populateDoses: function(doses) {
+        var length = doses.length;
+        const selector = '#medicine-dose';
+        $(selector).empty();
+        const emptyHtml = '<option value="" data-id="0">Please choose one.</option>';
+        $(selector).append(emptyHtml);
+        for (let i = 0; i < length; i++) {
+            const name = doses[i].name;
+            const html = '<option value="' + name +'">' + name + '</option>'
+            $(selector).append(html);
+        }
+        $(selector).selectmenu('refresh');
+    },
+
+    getFrequencies: function() {
+        var self = this;
+        var url = 'frequencies.json'
+        var promise = new Promise(function(resolve, reject){
+            AjaxHelper.getRequest(url, function(result) {
+                $('#medicine-frequency').empty();
+                if (result) {
+                    self.populateFrequencies(result);
+                }
+                resolve(true);
+            });
+        });
+
+        return promise;
+    },
+
+    populateFrequencies: function(frequencies) {
+        var length = frequencies.length;
+        const selector = '#medicine-frequency';
+        $(selector).empty();
+        const emptyHtml = '<option value="" data-id="0">Please choose one.</option>';
+        $(selector).append(emptyHtml);
+        for (let i = 0; i < length; i++) {
+            const name = frequencies[i].name;
+            const html = '<option value="' + name +'">' + name + '</option>'
+            $(selector).append(html);
+        }
+        $(selector).selectmenu('refresh');
+    },
+
+    clearMedicineOptions: function() {
+        $('#medicine-antibiotic').val('');
+        $('#medicine-dose').val('');
+        $('#medicine-frequency').val('');
+
+        $('#medicine-antibiotic').empty();
+        $('#medicine-dose').empty();
+        $('#medicine-frequency').empty();
+
+        $('#medicine-antibiotic').selectmenu('refresh');
+        $('#medicine-dose').selectmenu('refresh');
+        $('#medicine-frequency').selectmenu('refresh');
+    },
+
+    clearEventData: function() {
+        State.eventObj = {};
+    },
+
+    setEventData: function(eventData) {
+        State.eventObj = eventData;
+    }
 };
