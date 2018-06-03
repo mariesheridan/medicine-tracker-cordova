@@ -19,6 +19,7 @@ var Medicines = {
 
     populateMedicineList: function(medicines) {
         var self = this;
+        self.clearMedicineData();
         $('#medicine-list').empty();
         $.each(medicines, function(i, row) {
             var html =
@@ -43,16 +44,17 @@ var Medicines = {
     },
 
     displayMedicine: function(id) {
-        var contentElement = $('#view-medicine').find('.content-holder').first();
+        let contentElement = $('#view-medicine').find('.content-holder').first();
         contentElement.empty();
-        var medicines = State.medicines;
-        var medicine = medicines.find(function(item){
+        const medicines = State.medicines;
+        const medicine = medicines.find(function(item){
             return item.id === id;
         });
 
         if (medicine)
         {
-            var html =
+            this.setMedicineData(medicine);
+            const html =
                 "<div>" +
                     "<p>ID: " + medicine.id + "</p>" +
                     "<p>Antibiotic: " + medicine.antibiotic + "</p>" +
@@ -182,11 +184,11 @@ var Medicines = {
         $('#medicine-frequency').selectmenu('refresh');
     },
 
-    clearEventData: function() {
-        State.eventObj = {};
+    clearMedicineData: function() {
+        State.medicineObj = {};
     },
 
-    setEventData: function(eventData) {
-        State.eventObj = eventData;
+    setMedicineData: function(medicineData) {
+        State.medicineObj = medicineData;
     }
 };
