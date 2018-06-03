@@ -220,5 +220,20 @@ var Medicines = {
 
     setMedicineData: function(medicineData) {
         State.medicineObj = medicineData;
+    },
+
+    deleteMedicine: function(patientID, medicineID, antibiotic) {
+        if (confirm("Delete " + antibiotic + "?")) {
+            const url = 'patients/' + patientID + '/medicines/' + medicineID + ".json";
+            AjaxHelper.deleteRequest(url, {}, function(result){
+                if (result) {
+                    alert(antibiotic + " has been deleted successfully.");
+                }
+                Patients.getPatientItems(patientID, function(){
+                    const navigateToPage = '#medicines';
+                    $.mobile.navigate(navigateToPage);
+                });
+            });
+        }
     }
 };

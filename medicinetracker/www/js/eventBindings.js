@@ -13,6 +13,18 @@ $(document).ready(function(){
         e.preventDefault();
         Medicines.sendMedicineForm(State.patientID, State.medicineID);
     });
+
+    $('.delete-btn').off('click');
+    $('.delete-btn').on('click', function(e){
+        const type = $(this).data('type');
+        switch (type) {
+            case "medicine":
+                Medicines.deleteMedicine(State.patientID, State.medicineObj.id, State.medicineObj.antibiotic);
+                break;
+            default:
+                console.log("Deleting unsupported type");
+        }
+    });
 });
 
 $(document).on('pagebeforecreate', '#patients', function(){
