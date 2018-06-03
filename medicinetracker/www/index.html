@@ -175,6 +175,28 @@
             </div>
         </div>
 
+        <div data-role="page" id="edit-medicine">
+            <div data-role="header" data-position="fixed">
+                <a href="#medicines" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+                <h1>Edit Medicine</h1>
+            </div>
+            <div data-role="content">
+                <form id="edit-medicine-form">
+                    <label for="medicine-antibiotic">Antibiotic:</label>
+                    <select name="antibiotic" id="medicine-antibiotic" required></select>
+                    <label for="medicine-start">Start Date:</label>
+                    <input type="datetime-local" data-role="date" id="medicine-start" name="start_date" data-inline="true" required>
+                    <label for="medicine-end">End Date:</label>
+                    <input type="datetime-local" data-role="date" id="medicine-end" name="end_date" data-inline="true" required>
+                    <label for="medicine-dose">Dose:</label>
+                    <select name="dose" id="medicine-dose" required></select>
+                    <label for="medicine-frequency">Frequency:</label>
+                    <select name="frequency" id="medicine-frequency" required></select>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
         <div data-role="page" id="report">
             <div data-role="header" data-position="fixed">
                 <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
