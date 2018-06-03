@@ -27,7 +27,7 @@ var Events = {
                     '<a class="event-item" href="#view-event" data-id="' + row.id + '">' +
                         '<h3>' + row.reaction + '</h3>' +
                         '<p>Organ: ' + row.organ + '</p>' +
-                        '<p>Date: ' + row.event_date + '</p>' +
+                        '<p>Date: ' + moment(row.event_date, 'YYYY-MM-DDTHH:mm').format('YYYY-MM-DD HH:mm') + '</p>' +
                         '<p>Severity: ' + row.severity + '</p>' +
                     '</a>' +
                 '</li>';
@@ -88,7 +88,7 @@ var Events = {
                     "<p>ID: " + event.id + "</p>" +
                     "<p>Reaction: " + event.reaction + "</p>" +
                     "<p>Organ: " + event.organ + "</p>" +
-                    "<p>Date: " + event.event_date + "</p>" +
+                    "<p>Date: " + moment(event.event_date, 'YYYY-MM-DDTHH:mm').format('YYYY-MM-DD HH:mm') + "</p>" +
                     "<p>Severity: " + event.severity + "</p>" +
                 "</div>";
             contentElement.html(html);

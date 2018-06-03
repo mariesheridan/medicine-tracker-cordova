@@ -4,7 +4,7 @@ var Tools = {
             const key = $(this).attr('name');
             const value = data[key];
             if ($(this).attr('type') === 'datetime-local') {
-                const date = moment(value).format('YYYY-MM-DDTHH:mm');
+                const date = moment(value, 'YYYY-MM-DDTHH:mm').format('YYYY-MM-DDTHH:mm');
                 $(this).val(date);
             } else {
                 $(this).val(value);

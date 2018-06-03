@@ -14,8 +14,8 @@ var Report = {
             var medicine = {
                 id: idCounter++,
                 content: medicines[i].antibiotic,
-                start: medicines[i].start_date,
-                end: medicines[i].end_date,
+                start: moment(medicines[i].start_date, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00'),
+                end: moment(medicines[i].end_date, 'YYYY-MM-DD').format('YYYY-MM-DD 23:59'),
                 group: MedicineGroupID
             };
             itemsArray.push(medicine);
@@ -26,7 +26,7 @@ var Report = {
             var event = {
                 id: idCounter++,
                 content: events[i].organ + ": " + events[i].reaction,
-                start: events[i].event_date,
+                start: moment(events[i].event_date, 'YYYY-MM-DDTHH:mm').format('YYYY-MM-DDTHH:mm'),
                 group: EventGroupID
             };
             itemsArray.push(event);
