@@ -45,15 +45,18 @@ var Report = {
             }
         ];
 
+        const zoomMax = 7 * 24 * 60 * 60 * 1000;
+        const zoomMin = 4 * 60 * 60 * 1000;
+
         var options = {
+            align: 'left',
             editable: false,
-            timeAxis: {
-                scale: 'minute',
-                step: 30
-            },
-            zoomable: false,
             horizontalScroll: true,
-            stack: true
+            moveable: true,
+            stack: true,
+            zoomable: true,
+            zoomMax: zoomMax,
+            zoomMin: zoomMin
         };
 
         var timeline = new vis.Timeline(container, items, groups, options);
