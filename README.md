@@ -53,7 +53,21 @@ To set the URL to be used:
 2. Go to `chrome://inspect/#devices`
 ------
 
-======
+### Generate signed APK for android
+
+1. keytool -genkey -v -keystore MedicineTracker.keystore -alias medicinetracker
+
+2. mv MedicineTracker.keystore platforms\android\.
+
+3. Create a file in your `platforms/android/` directory with the name `release-signing.properties` .
+
+    storeFile=MedicineTracker.keystore
+    storeType=jks
+    keyAlias=medicinetracker
+
+
+
+------
 
 ### Problems Encountered ###
 
