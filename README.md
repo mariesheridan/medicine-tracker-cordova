@@ -33,7 +33,7 @@ To set the URL to be used:
 
 2. `npm install`
 
-3. `cordova add platform android`
+3. `cordova platform add android`
 
 4. `cordova prepare android`
 
