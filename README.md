@@ -1,6 +1,6 @@
 # README
 
-======
+------
 ### Setup ###
 
 1. Install node.js
@@ -14,7 +14,7 @@
 4. Add a simulator in Android Studio via Tools > AVD Manager.
    Choose API Level 26 (Android 8.0).
 
-======
+------
 ### Run the App ###
 
 To set the URL to be used:
@@ -43,7 +43,6 @@ To set the URL to be used:
 
 ------
 
-======
 ### Debug Emulator's JS, HTML, CSS ###
 
 ------
@@ -55,16 +54,22 @@ To set the URL to be used:
 
 ### Generate signed APK for android
 
-1. keytool -genkey -v -keystore MedicineTracker.keystore -alias medicinetracker
+(https://developer.android.com/studio/publish/app-signing)
+(https://haensel.pro/apache-cordova/cordova-create-a-signed-release-apk-easy-howto)
 
-2. mv MedicineTracker.keystore platforms\android\.
+1. keytool -genkey -v -keystore MedicineTracker.keystore -alias medicinetracker -validity 20000
+
+2. move MedicineTracker.keystore platforms\android\.
 
 3. Create a file in your `platforms/android/` directory with the name `release-signing.properties` .
 
     storeFile=MedicineTracker.keystore
     storeType=jks
     keyAlias=medicinetracker
+    keyPassword=password123
+    storePassword=password123
 
+4. cordova build android --release
 
 
 ------
