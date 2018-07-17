@@ -57,7 +57,7 @@ To set the URL to be used:
 (https://developer.android.com/studio/publish/app-signing)
 (https://haensel.pro/apache-cordova/cordova-create-a-signed-release-apk-easy-howto)
 
-1. keytool -genkey -v -keystore MedicineTracker.keystore -alias medicinetracker -validity 20000
+1. keytool -genkey -v -keystore MedicineTracker.keystore -keyalg RSA -keysize 2048 -validity 20000 -alias medicinetracker
 
 2. move MedicineTracker.keystore platforms\android\.
 
@@ -69,8 +69,13 @@ To set the URL to be used:
     keyPassword=password123
     storePassword=password123
 
+keytool -importkeystore -srckeystore MedicineTracker.keystore -destkeystore MedicineTracker.keystore -deststoretype pkcs12
+
 4. cordova build android --release
 
+To debug build:  
+`cd platform\android`
+`gradlew.bat assemble --stacktrace`
 
 ------
 
@@ -93,3 +98,35 @@ To set the URL to be used:
 
     Solution:
     In emulator, uninstall the app, then run `cordova emulate android` again.
+
+4. Problem:
+    ```
+    * What went wrong:
+    Execution failed for task ':app:packageRelease'.
+    > Failed to generate v1 signature
+    ```
+
+    After running `gradlew.bat assemble --stacktrace`:
+    ```
+    Information:Gradle tasks [:app:assembleDebug]
+
+    Error:org.gradle.tooling.BuildException: Failed to generate v1 signature
+
+    Error:java.io.IOException: Failed to generate v1 signature
+
+    Error:java.security.InvalidKeyException: Failed to sign using signer "CERT"
+
+    Error:java.security.InvalidKeyException: Failed to sign using SHA1withDSA
+
+    Error:java.security.InvalidKeyException: The security strength of SHA-1 digest algorithm is not sufficient for this key size
+
+    Information:BUILD FAILED in 1s
+
+    5 errors 0 warnings
+    ```
+
+    Solution:
+    Change the key generation to:
+    `keytool -genkey -v -keystore MedicineTracker.keystore -keyalg RSA -keysize 2048 -validity 20000 -alias medicinetracker`
+
+    because the default has changed from RSA to DSA.
