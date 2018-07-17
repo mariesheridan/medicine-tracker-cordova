@@ -54,46 +54,56 @@ To set the URL to be used:
 
 ### Generate signed APK for android
 
-(https://developer.android.com/studio/publish/app-signing)
-(https://haensel.pro/apache-cordova/cordova-create-a-signed-release-apk-easy-howto)
+Steps 1-4 are run only once. When the keystore is generated, you can skip to step 5.
 
-1. keytool -genkey -v -keystore MedicineTracker.keystore -keyalg RSA -keysize 2048 -validity 20000 -alias medicinetracker
+1. Install keytool
 
-2. move MedicineTracker.keystore platforms\android\.
+2. `keytool -genkey -v -keystore MedicineTracker.keystore -keyalg RSA -keysize 2048 -validity 20000 -alias medicinetracker`
 
-3. Create a file in your `platforms/android/` directory with the name `release-signing.properties` .
+3. `move MedicineTracker.keystore platforms\android\.`
 
+4. Create a file in your `platforms/android/` directory with the name `release-signing.properties` and put these there.
+
+    ```
     storeFile=MedicineTracker.keystore
     storeType=jks
     keyAlias=medicinetracker
     keyPassword=password123
     storePassword=password123
+    ```
 
-keytool -importkeystore -srckeystore MedicineTracker.keystore -destkeystore MedicineTracker.keystore -deststoretype pkcs12
-
-4. cordova build android --release
+5. cordova build android --release
 
 To debug build:  
-`cd platform\android`
-`gradlew.bat assemble --stacktrace`
+    `cd platform\android`
+    `gradlew.bat assemble --stacktrace`
+
+References:
+    (https://developer.android.com/studio/publish/app-signing)
+    (https://haensel.pro/apache-cordova/cordova-create-a-signed-release-apk-easy-howto)
 
 ------
 
 ### Problems Encountered ###
 
-1. Problem: `(node:11224) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'semver' of null`
+1. Problem:
+    ```
+    (node:11224) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'semver' of null
+    ```
 
    Solution: Remove Android API Level 27 from AVD Manager.
 
 2. Problem:
-   `error: device unauthorized.
+    ```
+    error: device unauthorized.
     This adb server's $ADB_VENDOR_KEYS is not set
-    Try 'adb kill-server' if that seems wrong.`
+    Try 'adb kill-server' if that seems wrong.
+    ```
 
    Solution:
    In emulator, tick on "Allow USB Debugging."
 
-3. Problem:
+3. Problem:  
     `cordova emulate android` takes a long time to finish. It seems stuck after "Built the following apk(s):"
 
     Solution:
