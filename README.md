@@ -42,6 +42,18 @@ To set the URL to be used:
 6. `cordova emulate android`
 
 ------
+#### ios ####
+1. `cd medicinetracker`
+
+2. `npm install`
+
+3. `cordova platform add ios`
+
+4. `cordova prepare ios`
+
+5. `cordova emulate ios`
+
+------
 
 ### Debug Emulator's JS, HTML, CSS ###
 
