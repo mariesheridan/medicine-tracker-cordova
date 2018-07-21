@@ -28,7 +28,7 @@ To set the URL to be used:
 
 
 ------
-#### android ####
+### Android ###
 1. `cd medicinetracker`
 
 2. `npm install`
@@ -41,30 +41,13 @@ To set the URL to be used:
 
 6. `cordova emulate android`
 
-------
-#### ios ####
-1. `cd medicinetracker`
+### Debug Emulator's JS, HTML, CSS for Android ###
 
-2. `npm install`
-
-3. `cordova platform add ios`
-
-4. `cordova prepare ios`
-
-5. `cordova emulate ios`
-
-------
-
-### Debug Emulator's JS, HTML, CSS ###
-
-------
-#### android ####
 1. Open Google Chrome
 
 2. Go to `chrome://inspect/#devices`
-------
 
-### Generate signed APK for android
+### Generate signed APK for Android
 
 Steps 1-4 are run only once. When the keystore is generated, you can skip to step 5.
 
@@ -94,9 +77,8 @@ References:
     (https://developer.android.com/studio/publish/app-signing)
     (https://haensel.pro/apache-cordova/cordova-create-a-signed-release-apk-easy-howto)
 
-------
 
-### Problems Encountered ###
+### Problems Encountered Android ###
 
 1. Problem:
     ```
@@ -152,3 +134,28 @@ References:
     `keytool -genkey -v -keystore MedicineTracker.keystore -keyalg RSA -keysize 2048 -validity 20000 -alias medicinetracker`
 
     because the default has changed from RSA to DSA.
+
+------
+### iOS ###
+    1. `cd medicinetracker`
+
+    2. `npm install`
+
+    3. `cordova platform add ios`
+
+    4. `cordova prepare ios`
+
+    5. `cordova emulate ios` (for the default simulator)
+
+#### Choosing another simulator
+    1. After `cordova prepario ios`, in file browser, go to medicinetracker/platforms/ios
+
+    2. Double click on MedicineTracker.xcworkspace
+
+    3. Xcode will open, choose the simulator, then press play
+
+### Debug Emulator's JS, HTML, CSS for iOS ###
+
+    1. Open Safari
+
+    2. In Menu, go to Develop > (Your simulator)
