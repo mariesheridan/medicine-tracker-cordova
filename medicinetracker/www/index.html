@@ -29,9 +29,9 @@
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
         <meta http-equiv="Content-Security-Policy"
-              content="default-src 'self' data: gap: https://ssl.gstatic.com https://polar-reaches-96790.herokuapp.com/ http://192.168.56.1:3000/ 'unsafe-eval';
-                       script-src 'self' 'unsafe-inline' 'unsafe-eval';
-                       style-src 'self' 'unsafe-inline';
+              content="default-src 'self' data: gap: https://ssl.gstatic.com https://polar-reaches-96790.herokuapp.com/ http://192.168.56.1:3000/ https://www.gstatic.com/ 'unsafe-eval';
+                       script-src * 'self' 'unsafe-inline' 'unsafe-eval' ;
+                       style-src * 'self' 'unsafe-inline';
                        media-src *;
                        img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
@@ -41,12 +41,13 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
         <link rel="stylesheet" type="text/css" href="css/vis.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
 
         <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="lib/moment.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="lib/vis.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
         <script type="text/javascript" src="js/state.js"></script>
         <script type="text/javascript" src="js/ajaxHelper.js"></script>
@@ -217,9 +218,16 @@
                 <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
                 <h1>Report</h1>
             </div>
-            <div data-role="content">
-                <div class="content-holder"></div>
+            <div class="timeline-holder">
+                <div class="timeline"></div>
             </div>
+            <div data-role="content">
+                <form>
+                    <label for="email">Email:</label>
+                    <input type="text" data-clear-btn="true" name="email" id="email" value="">
+                    <input type="submit" value="Send">
+                </form>
+          </div>
         </div>
     </body>
 </html>
