@@ -41,41 +41,13 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
         <link rel="stylesheet" type="text/css" href="css/vis.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
 
         <script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="lib/moment.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <!-- <script type="text/javascript" src="lib/vis.js"></script> -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            google.charts.load('current', {'packages':['timeline']});
-            google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
-              var container = document.getElementById('timeline');
-              var chart = new google.visualization.Timeline(container);
-              var dataTable = new google.visualization.DataTable();
-              var options = {
-                explorer: {
-                  axis: 'horizontal',
-                  keepInBounds: true
-                }
-              };
-
-              dataTable.addColumn({ type: 'string', id: 'President' });
-              dataTable.addColumn({ type: 'date', id: 'Start' });
-              dataTable.addColumn({ type: 'date', id: 'End' });
-              dataTable.addRows([
-                [ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
-                [ 'Adams',      new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
-                [ 'Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ],
-                [ 'Adams1',      new Date(1809, 2, 4),  new Date(1815, 2, 4) ],
-                [ 'Adams2',      new Date(1815, 2, 4),  new Date(1825, 2, 4) ]
-              ]);
-
-              chart.draw(dataTable);
-            }
-        </script>
 
         <script type="text/javascript" src="js/state.js"></script>
         <script type="text/javascript" src="js/ajaxHelper.js"></script>
@@ -100,6 +72,9 @@
                     <ul data-role="listview" id="patient-list" data-inset="true" data-filter="true"></ul>
                 </div>
             </div>
+            <!-- <div id="timeline2-holder">
+            <div id="timeline2"></div>
+            </div> -->
             <div data-role="footer" data-position="fixed">
                 <h1>Copyright 2017</h1>
             </div>
@@ -246,8 +221,8 @@
                 <a href="#view-patient" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
                 <h1>Report</h1>
             </div>
-            <div data-role="content">
-                <div id="timeline" class="content-holder"></div>
+            <div class="timeline-holder" data-role="content">
+                <div class="timeline"></div>
             </div>
         </div>
     </body>

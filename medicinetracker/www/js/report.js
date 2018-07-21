@@ -1,64 +1,57 @@
 var Report = {
     createReport: function(medicines, events) {
-        var contentHolder = $('#report').find('.content-holder').first();
-        contentHolder.empty();
-        var container = contentHolder[0];
-        const MedicineGroupID = 1;
-        const EventGroupID = 2;
-
-        var itemsArray = [];
-        var idCounter = 1;
-
-        var medicinesLength = medicines.length;
-        for (var i = 0; i < medicinesLength; i++) {
-            var medicine = {
-                id: idCounter++,
-                content: medicines[i].antibiotic,
-                start: moment(medicines[i].start_date, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00'),
-                end: moment(medicines[i].end_date, 'YYYY-MM-DD').format('YYYY-MM-DD 23:59'),
-                group: MedicineGroupID
+        google.charts.load('current', {'packages':['timeline']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var contentHolder = $('#report').find('.timeline').first();
+            contentHolder.empty();
+            var container = contentHolder[0];
+            var chart = new google.visualization.Timeline(container);
+            var dataTable = new google.visualization.DataTable();
+            var options = {
+                width: 2500,
+                timeline: {
+                    groupByRowLabel: false
+                }
             };
-            itemsArray.push(medicine);
-        }
 
-        var eventsLength = events.length;
-        for (var i = 0; i < eventsLength; i++) {
-            var event = {
-                id: idCounter++,
-                content: events[i].organ + ": " + events[i].reaction,
-                start: moment(events[i].event_date, 'YYYY-MM-DDTHH:mm').format('YYYY-MM-DDTHH:mm'),
-                group: EventGroupID
-            };
-            itemsArray.push(event);
-        }
+            dataTable.addColumn({ type: 'string', id: 'ItemType' });
+            dataTable.addColumn({ type: 'string', id: 'Title' });
+            // dataTable.addColumn({ type: 'string', role: 'tooltip' });
+            dataTable.addColumn({ type: 'date', id: 'Start' });
+            dataTable.addColumn({ type: 'date', id: 'End' });
 
-        var items = new vis.DataSet(itemsArray);
-
-        var groups = [
-            {
-                id: MedicineGroupID,
-                content: "Medicines"
-            },
-            {
-                id: EventGroupID,
-                content: "Events"
+            var medicinesLength = medicines.length;
+            for (var i = 0; i < medicinesLength; i++) {
+                const start = moment(medicines[i].start_date, 'YYYY-MM-DD');
+                const end = moment(medicines[i].end_date, 'YYYY-MM-DD').toDate();
+                const duration = moment.duration(start.diff(end)).humanize();
+                // const tooltip = "<div>Duration: " + duration + "</div>";
+                var medicine = [
+                    'Medicine',
+                    medicines[i].antibiotic,
+                    // tooltip,
+                    moment(medicines[i].start_date, 'YYYY-MM-DD').toDate(),
+                    moment(medicines[i].end_date, 'YYYY-MM-DD').toDate()
+                ];
+                dataTable.addRow(medicine);
             }
-        ];
 
-        const zoomMax = 7 * 24 * 60 * 60 * 1000;
-        const zoomMin = 4 * 60 * 60 * 1000;
+            var eventsLength = events.length;
+            for (var i = 0; i < eventsLength; i++) {
+                const date = moment(events[i].event_date, 'YYYY-MM-DDTHH:mm');
+                // const tooltip = "Date and Time: " + date.format("YYYY-MM-DD HH:mm");
+                var event = [
+                    'Event',
+                    events[i].organ + ": " + events[i].reaction,
+                    // tooltip,
+                    date.toDate(),
+                    date.add(1, 'hour').toDate()
+                ];
+                dataTable.addRow(event);
+            }
 
-        var options = {
-            align: 'left',
-            editable: false,
-            horizontalScroll: true,
-            moveable: true,
-            stack: true,
-            zoomable: true,
-            zoomMax: zoomMax,
-            zoomMin: zoomMin
-        };
-
-        var timeline = new vis.Timeline(container, items, groups, options);
+            chart.draw(dataTable, options);
+        }
     }
 };
