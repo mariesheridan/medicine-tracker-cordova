@@ -37,5 +37,15 @@ var Tools = {
         let selectElement = $(selector);
         selectElement.val(value);
         selectElement.selectmenu('refresh');
+    },
+
+    getMaxDate: function(moments) {
+        let maxDate = moment.max(moments)
+        return maxDate;
+    },
+
+    getMinDate: function(moments) {
+        let minDate = moment.min(moments)
+        return minDate;
     }
 };

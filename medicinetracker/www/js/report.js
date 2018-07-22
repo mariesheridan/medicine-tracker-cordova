@@ -8,48 +8,55 @@ var Report = {
             var container = contentHolder[0];
             var chart = new google.visualization.Timeline(container);
             var dataTable = new google.visualization.DataTable();
-            var options = {
-                width: 2500,
-                timeline: {
-                    groupByRowLabel: false
-                }
-            };
 
             dataTable.addColumn({ type: 'string', id: 'ItemType' });
             dataTable.addColumn({ type: 'string', id: 'Title' });
-            // dataTable.addColumn({ type: 'string', role: 'tooltip' });
             dataTable.addColumn({ type: 'date', id: 'Start' });
             dataTable.addColumn({ type: 'date', id: 'End' });
 
-            var medicinesLength = medicines.length;
+            var datesArray = [];
+
+            const medicinesLength = medicines.length;
             for (var i = 0; i < medicinesLength; i++) {
                 const start = moment(medicines[i].start_date, 'YYYY-MM-DD');
-                const end = moment(medicines[i].end_date, 'YYYY-MM-DD').toDate();
-                const duration = moment.duration(start.diff(end)).humanize();
-                // const tooltip = "<div>Duration: " + duration + "</div>";
+                const end = moment(medicines[i].end_date, 'YYYY-MM-DD');
+                datesArray.push(start);
+                datesArray.push(end);
                 var medicine = [
                     'Medicine',
                     medicines[i].antibiotic,
-                    // tooltip,
-                    moment(medicines[i].start_date, 'YYYY-MM-DD').toDate(),
-                    moment(medicines[i].end_date, 'YYYY-MM-DD').toDate()
+                    start.toDate(),
+                    end.toDate()
                 ];
                 dataTable.addRow(medicine);
             }
 
-            var eventsLength = events.length;
+            const eventsLength = events.length;
             for (var i = 0; i < eventsLength; i++) {
                 const date = moment(events[i].event_date, 'YYYY-MM-DDTHH:mm');
-                // const tooltip = "Date and Time: " + date.format("YYYY-MM-DD HH:mm");
+                datesArray.push(date);
                 var event = [
                     'Event',
                     events[i].organ + ": " + events[i].reaction,
-                    // tooltip,
                     date.toDate(),
                     date.add(1, 'hour').toDate()
                 ];
                 dataTable.addRow(event);
             }
+
+            let minDate = Tools.getMinDate(datesArray);
+            let maxDate = Tools.getMaxDate(datesArray);
+            let days = Math.ceil(moment.duration(maxDate.diff(minDate)).asDays()) + 1;
+            let width = (days * 100) + 100;
+
+            const options = {
+                width: width,
+                height: 400,
+                timeline: {
+                    groupByRowLabel: false,
+                    colorByRowLabel: true
+                }
+            };
 
             chart.draw(dataTable, options);
         }
