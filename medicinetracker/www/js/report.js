@@ -18,8 +18,8 @@ var Report = {
 
             const medicinesLength = medicines.length;
             for (var i = 0; i < medicinesLength; i++) {
-                const start = moment(medicines[i].start_date, 'YYYY-MM-DD');
-                const end = moment(medicines[i].end_date, 'YYYY-MM-DD');
+                const start = moment(medicines[i].start_date, 'YYYY-MM-DDTHH:mm');
+                const end = moment(medicines[i].end_date, 'YYYY-MM-DDTHH:mm');
                 datesArray.push(start);
                 datesArray.push(end);
                 var medicine = [
