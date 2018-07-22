@@ -60,5 +60,18 @@ var Report = {
 
             chart.draw(dataTable, options);
         }
-    }
+    },
+
+    sendReport: function(patientID) {
+        const formSelector = '#send-email-form';
+        $(formSelector).find('input[name=patient_id]').first().val(patientID);
+        const jsonData = Tools.getFormJSONData(formSelector);
+
+        var url = 'report/sendEmailFromApp';
+        AjaxHelper.postRequest(url, jsonData, function(result){
+            if (result) {
+                alert(result.message);
+            }
+        });
+    },
 };

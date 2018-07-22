@@ -14,6 +14,11 @@ $(document).ready(function(){
         Medicines.sendMedicineForm(State.patientID, State.medicineID);
     });
 
+    $('#send-email-form').submit(function(e){
+        e.preventDefault();
+        Report.sendReport(State.patientID);
+    });
+
     $('.delete-btn').off('click');
     $('.delete-btn').on('click', function(e){
         const type = $(this).data('type');
