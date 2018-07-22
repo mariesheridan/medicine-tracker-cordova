@@ -1,6 +1,6 @@
 .timeline-holder {
     overflow-x: scroll;
     overflow-y: hidden;
-    width: 300px;
+    width: 100%;
     height: 100%;
 }
