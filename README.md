@@ -159,3 +159,34 @@ References:
     1. Open Safari
 
     2. In Menu, go to Develop > (Your simulator)
+
+### Generate .ipa file for ios over-the-air installation
+
+Before exporting, make sure that the device IDs are registered in the certificate that will be used to build the app.
+
+    1. Open medicinetracker/platforms/ios/MedicieTracker.xcworkspace in Xcode
+
+    2. Download the certificate from the Apple Developer account. The certificate should be configured for AdHoc Distribution.
+
+    2. Set the proper provisioning profile. Xcode > Preferences > (Select the Apple ID) > Download Manual Profiles
+
+    3. Select 'Generic iOS Device' as target.
+
+    4. Product > Archive
+
+    5. Window > Organizer. Select the newly created archive. Then in the right panel, click on 'Export'.
+
+    6. Select AdHoc.
+
+    7. Check 'Include manifest for over-the-air installation.'
+
+    8. Set the App URL, Display Image URL, and Full Size Image URL.
+
+    9. Indicate the location for the export.
+
+    10. After the export, save the contents of the generated folder into a location where you can access them via https.
+
+    11. Use this link format: "itms-services://?action=download-manifest&url=<https/url/to/manifest.plist>".
+        Example: itms-services://?action=download-manifest&url=https://storage.googleapis.com/medicine-tracker/ios/ipa/v0.0.01/manifest.plist
+
+    12. Open this link on the device using safari. (It will not work on any other browser.)
