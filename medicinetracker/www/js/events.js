@@ -166,6 +166,7 @@ var Events = {
         $('#event-organ').on('change', function(){
             const value = $(this).val();
             const organID = $(this).find('option[value="' + value + '"]').first().data('id');
+            $('#event-organ').selectmenu('refresh');
             $('#event-reaction').val('');
             self.updateReactions(organID);
         });
