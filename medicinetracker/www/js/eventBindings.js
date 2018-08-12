@@ -53,6 +53,10 @@ $(document).on('pagebeforeshow', '#edit-patient', function(){
     }
 });
 
+$(document).on('pagebeforehide', '#edit-patient', function(){
+    Patients.clearPatientForm();
+});
+
 $(document).on('pagebeforeshow', '#events', function(){
     State.eventID = 0;
     $('#event-list').listview('refresh');

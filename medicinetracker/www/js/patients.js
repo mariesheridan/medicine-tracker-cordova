@@ -149,4 +149,9 @@ var Patients = {
             $.mobile.navigate(page);
         });
     },
+
+    clearPatientForm: function() {
+        $('#patient-name').val('');
+        $('#patient-urn').val('');
+    },
 };
