@@ -53,22 +53,14 @@ var Medicines = {
         if (!medicineID) {
             var url = 'patients/' + patientID + '/medicines.json';
             AjaxHelper.postRequest(url, jsonData, function(result){
-                if (result) {
-                    alert(antibiotic + " has been created successfully.");
-                }
-                Patients.getPatientItems(patientID, function(){
-                    $.mobile.navigate(navigateToPage);
-                });
+                const message = antibiotic + " has been created successfully.";
+                Tools.createItemCallback(result, message, patientID, navigateToPage);
             });
         } else {
             var url = 'patients/' + patientID + '/medicines/' + medicineID + '.json';
             AjaxHelper.putRequest(url, jsonData, function(result){
-                if (result) {
-                    alert(antibiotic + " has been updated successfully.");
-                }
-                Patients.getPatientItems(patientID, function(){
-                    $.mobile.navigate(navigateToPage);
-                });
+                const message = antibiotic + " has been updated successfully.";
+                Tools.updateItemCallback(result, message, patientID, navigateToPage);
             });
         }
     },
@@ -223,17 +215,18 @@ var Medicines = {
     },
 
     deleteMedicine: function(patientID, medicineID, antibiotic) {
-        if (confirm("Delete " + antibiotic + "?")) {
-            const url = 'patients/' + patientID + '/medicines/' + medicineID + ".json";
-            AjaxHelper.deleteRequest(url, {}, function(result){
-                if (result) {
-                    alert(antibiotic + " has been deleted successfully.");
-                }
-                Patients.getPatientItems(patientID, function(){
+        navigator.notification.confirm(
+            "Delete " + antibiotic + "?",
+            function() {
+                const url = 'patients/' + patientID + '/medicines/' + medicineID + ".json";
+                AjaxHelper.deleteRequest(url, {}, function(result){
                     const navigateToPage = '#medicines';
-                    $.mobile.navigate(navigateToPage);
+                    const message = antibiotic + " has been deleted successfully.";
+                    Tools.deleteItemCallback(result, message, patientID, navigateToPage);
                 });
-            });
-        }
+            },
+            'Confirm',
+            ['Delete', 'Cancel']
+        );
     }
 };

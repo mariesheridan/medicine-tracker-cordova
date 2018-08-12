@@ -47,5 +47,50 @@ var Tools = {
     getMinDate: function(moments) {
         let minDate = moment.min(moments)
         return minDate;
+    },
+
+    createItemCallback: function(result, message, patientID, navigateToPage) {
+        if (result) {
+            navigator.notification.alert(
+                message,
+                function() {
+                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                },
+                "Creation Successful",
+                "Close"
+            );
+        } else {
+            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+        }
+    },
+
+    updateItemCallback: function(result, message, patientID, navigateToPage) {
+        if (result) {
+            navigator.notification.alert(
+                message,
+                function() {
+                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                },
+                "Update Successful",
+                "Close"
+            );
+        } else {
+            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+        }
+    },
+
+    deleteItemCallback: function(result, message, patientID, navigateToPage) {
+        if (result) {
+            navigator.notification.alert(
+                message,
+                function() {
+                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                },
+                "Deletion Successful",
+                "Close"
+            );
+        } else {
+            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+        }
     }
 };

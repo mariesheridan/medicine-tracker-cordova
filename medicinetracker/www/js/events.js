@@ -53,34 +53,14 @@ var Events = {
         if (!eventID) {
             var url = 'patients/' + patientID + '/events.json';
             AjaxHelper.postRequest(url, jsonData, function(result){
-                if (result) {
-                    navigator.notification.alert(
-                        reaction + " has been created successfully.",
-                        function() {
-                            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
-                        },
-                        "Creation Successful",
-                        "Close"
-                    );
-                } else {
-                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
-                }
+                const message = reaction + " has been created successfully.";
+                Tools.createItemCallback(result, message, patientID, navigateToPage);
             });
         } else {
             var url = 'patients/' + patientID + '/events/' + eventID + '.json';
             AjaxHelper.putRequest(url, jsonData, function(result){
-                if (result) {
-                    navigator.notification.alert(
-                        reaction + " has been updated successfully.",
-                        function() {
-                            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
-                        },
-                        "Update Successful",
-                        "Close"
-                    );
-                } else {
-                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
-                }
+                const message = reaction + " has been updated successfully.";
+                Tools.updateItemCallback(result, message, patientID, navigateToPage);
             });
         }
     },
@@ -283,14 +263,8 @@ var Events = {
                 const url = 'patients/' + patientID + '/events/' + eventID + ".json";
                 AjaxHelper.deleteRequest(url, {}, function(result){
                     const navigateToPage = '#events';
-                    navigator.notification.alert(
-                        reaction + " has been deleted successfully.",
-                        function() {
-                            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
-                        },
-                        "Deletion Successful",
-                        "Close"
-                    );
+                    const message = reaction + " has been deleted successfully.";
+                    Tools.deleteItemCallback(result, message, patientID, navigateToPage);
                 });
             },
             'Confirm',
