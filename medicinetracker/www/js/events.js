@@ -44,6 +44,7 @@ var Events = {
     },
 
     sendEventForm: function(patientID, eventID) {
+        var self = this;
         const formSelector = '#edit-event-form';
         const jsonData = Tools.getFormJSONData(formSelector);
         const reaction = $(formSelector).find('[name="reaction"]').first().val();
@@ -53,23 +54,41 @@ var Events = {
             var url = 'patients/' + patientID + '/events.json';
             AjaxHelper.postRequest(url, jsonData, function(result){
                 if (result) {
-                    alert(reaction + " has been created successfully.");
+                    navigator.notification.alert(
+                        reaction + " has been created successfully.",
+                        function() {
+                            self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                        },
+                        "Confirmation",
+                        "Close"
+                    );
+                } else {
+                    self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                 }
-                Patients.getPatientItems(patientID, function(){
-                    $.mobile.navigate(navigateToPage);
-                });
             });
         } else {
             var url = 'patients/' + patientID + '/events/' + eventID + '.json';
             AjaxHelper.putRequest(url, jsonData, function(result){
                 if (result) {
-                    alert(reaction + " has been updated successfully.");
+                    navigator.notification.alert(
+                        reaction + " has been updated successfully.",
+                        function() {
+                            self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                        },
+                        "Confirmation",
+                        "Close"
+                    );
+                } else {
+                    self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                 }
-                Patients.getPatientItems(patientID, function(){
-                    $.mobile.navigate(navigateToPage);
-                });
             });
         }
+    },
+
+    loadPatientItemsAndNavigateToPage: function(patientID, page) {
+        Patients.getPatientItems(patientID, function(){
+            $.mobile.navigate(page);
+        });
     },
 
     displayEvent: function(id) {
@@ -267,13 +286,18 @@ var Events = {
         if (confirm("Delete " + reaction + "?")) {
             const url = 'patients/' + patientID + '/events/' + eventID + ".json";
             AjaxHelper.deleteRequest(url, {}, function(result){
+                const navigateToPage = '#events';
                 if (result) {
-                    alert(reaction + " has been deleted successfully.");
+                    navigator.notification.alert(
+                        reaction + " has been deleted successfully.",
+                        function() {
+                            self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                        },
+                        "Confirmation",
+                        "Close"
+                    );
                 }
-                Patients.getPatientItems(patientID, function(){
-                    const navigateToPage = '#events';
-                    $.mobile.navigate(navigateToPage);
-                });
+                self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
             });
         }
     }
