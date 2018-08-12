@@ -113,5 +113,11 @@ var Patients = {
                 $.mobile.navigate(navigateToPage);
             });
         }
-    }
+    },
+
+    loadPatientItemsAndNavigateToPage: function(patientID, page) {
+        this.getPatientItems(patientID, function(){
+            $.mobile.navigate(page);
+        });
+    },
 };

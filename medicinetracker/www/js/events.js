@@ -57,13 +57,13 @@ var Events = {
                     navigator.notification.alert(
                         reaction + " has been created successfully.",
                         function() {
-                            self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                         },
-                        "Alert",
+                        "Creation Successful",
                         "Close"
                     );
                 } else {
-                    self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                 }
             });
         } else {
@@ -73,22 +73,16 @@ var Events = {
                     navigator.notification.alert(
                         reaction + " has been updated successfully.",
                         function() {
-                            self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                         },
-                        "Alert",
+                        "Update Successful",
                         "Close"
                     );
                 } else {
-                    self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                    Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                 }
             });
         }
-    },
-
-    loadPatientItemsAndNavigateToPage: function(patientID, page) {
-        Patients.getPatientItems(patientID, function(){
-            $.mobile.navigate(page);
-        });
     },
 
     displayEvent: function(id) {
@@ -283,7 +277,6 @@ var Events = {
     },
 
     deleteEvent: function(patientID, eventID, reaction) {
-        var self = this;
         navigator.notification.confirm(
             "Delete " + reaction + "?",
             function() {
@@ -293,9 +286,9 @@ var Events = {
                     navigator.notification.alert(
                         reaction + " has been deleted successfully.",
                         function() {
-                            self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
+                            Patients.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                         },
-                        "Alert",
+                        "Deletion Successful",
                         "Close"
                     );
                 });
