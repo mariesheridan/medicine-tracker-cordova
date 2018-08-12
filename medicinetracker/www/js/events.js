@@ -59,7 +59,7 @@ var Events = {
                         function() {
                             self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                         },
-                        "Confirmation",
+                        "Alert",
                         "Close"
                     );
                 } else {
@@ -75,7 +75,7 @@ var Events = {
                         function() {
                             self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                         },
-                        "Confirmation",
+                        "Alert",
                         "Close"
                     );
                 } else {
@@ -283,22 +283,25 @@ var Events = {
     },
 
     deleteEvent: function(patientID, eventID, reaction) {
-        if (confirm("Delete " + reaction + "?")) {
-            const url = 'patients/' + patientID + '/events/' + eventID + ".json";
-            AjaxHelper.deleteRequest(url, {}, function(result){
-                const navigateToPage = '#events';
-                if (result) {
+        var self = this;
+        navigator.notification.confirm(
+            "Delete " + reaction + "?",
+            function() {
+                const url = 'patients/' + patientID + '/events/' + eventID + ".json";
+                AjaxHelper.deleteRequest(url, {}, function(result){
+                    const navigateToPage = '#events';
                     navigator.notification.alert(
                         reaction + " has been deleted successfully.",
                         function() {
                             self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
                         },
-                        "Confirmation",
+                        "Alert",
                         "Close"
                     );
-                }
-                self.loadPatientItemsAndNavigateToPage(patientID, navigateToPage);
-            });
-        }
+                });
+            },
+            'Confirm',
+            ['Delete', 'Cancel']
+        );
     }
 };
