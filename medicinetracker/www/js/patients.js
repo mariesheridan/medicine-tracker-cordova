@@ -45,17 +45,33 @@ var Patients = {
             var url = 'patients.json';
             AjaxHelper.postRequest('patients.json', jsonData, function(result){
                 if (result) {
-                    alert(name + " has been created successfully.");
+                    navigator.notification.alert(
+                        name + " has been created successfully.",
+                        function() {
+                            $.mobile.navigate(navigateToPage);
+                        },
+                        "Creation Successful",
+                        "Close"
+                    );
+                } else {
+                    $.mobile.navigate(navigateToPage);
                 }
-                $.mobile.navigate(navigateToPage);
             });
         } else {
             var url = 'patients/' + id + '.json';
             AjaxHelper.putRequest(url, jsonData, function(result){
                 if (result) {
-                    alert(name + " has been updated successfully.");
+                    navigator.notification.alert(
+                        name + " has been updated successfully.",
+                        function() {
+                            $.mobile.navigate(navigateToPage);
+                        },
+                        "Update Successful",
+                        "Close"
+                    );
+                } else {
+                    $.mobile.navigate(navigateToPage);
                 }
-                $.mobile.navigate(navigateToPage);
             });
         }
     },
@@ -103,16 +119,29 @@ var Patients = {
     },
 
     deletePatient: function(patientID, name) {
-        if (confirm("Delete " + name + "?")) {
-            const url = 'patients/' + patientID + ".json";
-            AjaxHelper.deleteRequest(url, {}, function(result){
-                if (result) {
-                    alert(name + " has been deleted successfully.");
-                }
-                const navigateToPage = '#patients';
-                $.mobile.navigate(navigateToPage);
-            });
-        }
+        navigator.notification.confirm(
+            "Delete " + name + "?",
+            function() {
+                const url = 'patients/' + patientID + ".json";
+                AjaxHelper.deleteRequest(url, {}, function(result){
+                    const navigateToPage = '#patients';
+                    if (result) {
+                        navigator.notification.alert(
+                            name + " has been deleted successfully.",
+                            function() {
+                                $.mobile.navigate(navigateToPage);
+                            },
+                            "Deletion Successful",
+                            "Close"
+                        );
+                    } else {
+                        $.mobile.navigate(navigateToPage);
+                    }
+                });
+            },
+            'Confirm',
+            ['Delete', 'Cancel']
+        );
     },
 
     loadPatientItemsAndNavigateToPage: function(patientID, page) {
