@@ -23,6 +23,25 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <platform name="ios">
+        <icon height="180" src="res/icon/ios/pills-60@3x.png" width="180" />
+        <icon height="60" src="res/icon/ios/pills-60.png" width="60" />
+        <icon height="120" src="res/icon/ios/pills-60@2x.png" width="120" />
+        <icon height="76" src="res/icon/ios/pills-76.png" width="76" />
+        <icon height="152" src="res/icon/ios/pills-76@2x.png" width="152" />
+        <icon height="40" src="res/icon/ios/pills-40.png" width="40" />
+        <icon height="80" src="res/icon/ios/pills-40@2x.png" width="80" />
+        <icon height="57" src="res/icon/ios/pills.png" width="57" />
+        <icon height="114" src="res/icon/ios/pills@2x.png" width="114" />
+        <icon height="72" src="res/icon/ios/pills-72.png" width="72" />
+        <icon height="144" src="res/icon/ios/pills-72@2x.png" width="144" />
+        <icon height="167" src="res/icon/ios/pills-167.png" width="167" />
+        <icon height="29" src="res/icon/ios/pills-small.png" width="29" />
+        <icon height="58" src="res/icon/ios/pills-small@2x.png" width="58" />
+        <icon height="50" src="res/icon/ios/pills-50.png" width="50" />
+        <icon height="100" src="res/icon/ios/pills-50@2x.png" width="100" />
+        <icon height="167" src="res/icon/ios/pills-83.5@2x.png" width="167" />
+    </platform>
     <engine name="android" spec="^7.0.0" />
     <engine name="ios" spec="^4.5.4" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
